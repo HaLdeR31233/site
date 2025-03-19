@@ -1,0 +1,22 @@
+    body {
+    background: url('https://dom.ria.com/images/bg.jpg') no-repeat center center/cover;
+    color: #333;
+    font-family: Arial, sans-serif;
+}
+    .container {
+    border: 2px solid #ccc;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+    .navbar a {
+    color: #ff6600;
+    font-weight: bold;
+}
+    .hero {
+    text-align: center;
+    padding: 50px 20px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 2px solid #ff6600;
+    border-radius: 10px;
+}
