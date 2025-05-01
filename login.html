@@ -1,0 +1,144 @@
+<div id="root">
+  <link rel="stylesheet" href="./styles.css">
+  <div class="flex flex-col min-h-screen">
+      <header class="sticky top-0 bg-white shadow-sm z-50">
+          <div class="container mx-auto px-4">
+              <div class="flex items-center justify-between h-16"><a class="flex items-center space-x-2" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-6 h-6 text-blue-600">
+                          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                          <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                      </svg><span class="text-xl font-bold text-blue-600">ДІМ.UA</span></a>
+                      <nav class="hidden md:flex items-center space-x-1"><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="/buy.html">Купити</a><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="/rent.html">Орендувати</a><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="/new-builds.html">Новобудови</a><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="/commercial.html">Комерційна</a></nav>
+                      <div class="hidden md:flex items-center space-x-4"><a class="text-gray-600 hover:text-blue-600" href="/search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search w-5 h-5">
+                                  <circle cx="11" cy="11" r="8"></circle>
+                                  <path d="m21 21-4.3-4.3"></path>
+                              </svg></a><a href="/login.html"><button class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border border-gray-300 bg-transparent hover:bg-gray-100 active:bg-gray-200 h-9 px-3 text-sm  "><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 mr-2">
+                                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                  <polyline points="10 17 15 12 10 7"></polyline>
+                                  <line x1="15" x2="3" y1="12" y2="12"></line>
+                              </svg>Увійти</button></a></div><button class="md:hidden p-2 text-gray-600 hover:text-blue-600"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6">
+                          <line x1="4" x2="20" y1="12" y2="12"></line>
+                          <line x1="4" x2="20" y1="6" y2="6"></line>
+                          <line x1="4" x2="20" y1="18" y2="18"></line>
+                      </svg></button>
+              </div>
+          </div>
+      </header>
+      <main class="flex-grow">
+          <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+              <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                  <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Вхід в особистий кабінет</h2>
+              </div>
+              <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                  <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+                      <form class="space-y-6">
+                          <div>
+                              <div class="block text-sm font-medium text-gray-700">Email</div>
+                              <div class="mt-1 relative"><input id="email" name="email" type="email" autocomplete="email" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail h-5 w-5 text-gray-400">
+                                          <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                          <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                                      </svg></div>
+                              </div>
+                          </div>
+                          <div>
+                              <div class="block text-sm font-medium text-gray-700">Пароль</div>
+                              <div class="mt-1 relative"><input id="password" name="password" type="password" autocomplete="current-password" required="" class="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                  <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock h-5 w-5 text-gray-400">
+                                          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                                          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                      </svg></div>
+                              </div>
+                          </div>
+                          <div class="flex items-center justify-between">
+                              <div class="flex items-center"><input id="remember-me" name="remember-me" type="checkbox" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                                  <div class="ml-2 block text-sm text-gray-900">Запам'ятати мене</div>
+                              </div>
+                              <div class="text-sm"><a href="#" class="font-medium text-blue-600 hover:text-blue-500">Забули пароль?</a></div>
+                          </div>
+                          <div><button class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none bg-blue-600 text-white hover:bg-blue-700 active:bg-blue-800 h-10 px-4 text-sm w-full ">Увійти</button></div>
+                      </form>
+                      <div class="mt-6">
+                          <div class="relative">
+                              <div class="absolute inset-0 flex items-center">
+                                  <div class="w-full border-t border-gray-300"></div>
+                              </div>
+                              <div class="relative flex justify-center text-sm"><span class="px-2 bg-white text-gray-500">Або увійти через</span></div>
+                          </div>
+                          <div class="mt-6"><button class="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook w-5 h-5 text-blue-600 mr-2">
+                                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                                  </svg>Facebook</button></div>
+                      </div>
+                      <div class="mt-6 text-center">
+                          <p class="text-sm text-gray-600">Ще не зареєстровані? <a href="#" class="font-medium text-blue-600 hover:text-blue-500">Створити акаунт</a></p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </main>
+      <footer class="bg-gray-800 text-gray-200">
+          <div class="container mx-auto px-4 py-8">
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  <div>
+                      <h3 class="text-xl font-bold mb-4">ДІМ.UA</h3>
+                      <p class="mb-4">Найбільший сайт нерухомості в Україні. Щодня тисячі нових пропозицій від власників та агентств нерухомості.</p>
+                      <div class="flex space-x-4"><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook ">
+                                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                              </svg></a><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram ">
+                                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                  <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
+                              </svg></a><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube ">
+                                  <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
+                                  <path d="m10 15 5-3-5-3z"></path>
+                              </svg></a><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin ">
+                                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+                                  <rect width="4" height="12" x="2" y="9"></rect>
+                                  <circle cx="4" cy="4" r="2"></circle>
+                              </svg></a></div>
+                  </div>
+                  <div>
+                      <h3 class="text-lg font-semibold mb-4">Швидкі посилання</h3>
+                      <ul class="space-y-2">
+                          <li><a class="hover:text-blue-400" href="/about">Про нас</a></li>
+                          <li><a class="hover:text-blue-400" href="/contact">Контакти</a></li>
+                          <li><a class="hover:text-blue-400" href="/news">Новини ринку</a></li>
+                          <li><a class="hover:text-blue-400" href="/help">Допомога</a></li>
+                          <li><a class="hover:text-blue-400" href="/terms">Умови використання</a></li>
+                          <li><a class="hover:text-blue-400" href="/privacy">Політика конфіденційності</a></li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h3 class="text-lg font-semibold mb-4">Типи нерухомості</h3>
+                      <ul class="space-y-2">
+                          <li><a class="hover:text-blue-400" href="/apartments">Квартири</a></li>
+                          <li><a class="hover:text-blue-400" href="/houses">Будинки</a></li>
+                          <li><a class="hover:text-blue-400" href="/commercial">Комерційна нерухомість</a></li>
+                          <li><a class="hover:text-blue-400" href="/new-builds">Новобудови</a></li>
+                          <li><a class="hover:text-blue-400" href="/land">Земельні ділянки</a></li>
+                          <li><a class="hover:text-blue-400" href="/garage">Гаражі</a></li>
+                      </ul>
+                  </div>
+                  <div>
+                      <h3 class="text-lg font-semibold mb-4">Контактна інформація</h3>
+                      <ul class="space-y-3">
+                          <li class="flex items-start"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-5 h-5 mr-2 mt-0.5">
+                                  <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                                  <circle cx="12" cy="10" r="3"></circle>
+                              </svg><span>вул. Хрещатик, 22, Київ, 01001</span></li>
+                          <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-5 h-5 mr-2">
+                                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                              </svg><span>+380 44 123 45 67</span></li>
+                          <li class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-5 h-5 mr-2">
+                                  <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                              </svg><span>info@dim.ua</span></li>
+                      </ul>
+                  </div>
+              </div>
+              <div class="border-t border-gray-700 mt-8 pt-6 text-sm text-center text-gray-400">
+                  <p>© 2025 ДІМ.UA. Всі права захищені.</p>
+              </div>
+          </div>
+      </footer>
+  </div>
+</div>
