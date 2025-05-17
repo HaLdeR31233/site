@@ -1,983 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8" />
-    <title>ДІМ.UA - Нерухомість в Україні</title>
-    <meta name="description" content="Найбільший сайт нерухомості в Україні. Купівля, продаж та оренда квартир, будинків та комерційної нерухомості." />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./normalize.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Перевірена нерухомість на мапі</title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 <body>
-    <div id="root">
-        <div id="root">
-            <div class="flex flex-col min-h-screen">
-                <header class="sticky top-0 bg-white shadow-sm z-50">
-                    <div class="container mx-auto px-4">
-                        <div class="flex items-center justify-between h-16">
-                            <a class="flex items-center space-x-2" href="/"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-6 h-6 text-blue-600">
-                                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                </svg><span class="text-xl font-bold text-blue-600">ДІМ.UA</span></a>
-                            <nav class="hidden md:flex items-center space-x-1">
-                                <a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="./buy.html">Купити</a><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="./rent.html">Орендувати</a><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="./new-builds.html">Новобудови</a><a class="px-3 py-2 text-gray-700 hover:text-blue-600 font-medium" href="./commercial.html">Комерційна</a>
-                            </nav>
-                            <div class="hidden md:flex items-center space-x-4">
-                                <a class="text-gray-600 hover:text-blue-600" href="./search.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search w-5 h-5">
-                                        <circle cx="11" cy="11" r="8"></circle>
-                                        <path d="m21 21-4.3-4.3"></path>
-                                    </svg></a><a href="./login.html"><button class="inline-flex items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none border border-gray-300 bg-transparent hover:bg-gray-100 active:bg-gray-200 h-9 px-3 text-sm">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-log-in w-4 h-4 mr-2">
-                                            <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
-                                            <polyline points="10 17 15 12 10 7"></polyline>
-                                            <line x1="15" x2="3" y1="12" y2="12"></line>
-                                        </svg>Увійти
-                                    </button></a>
-                            </div>
-                            <button class="md:hidden p-2 text-gray-600 hover:text-blue-600">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu w-6 h-6">
-                                    <line x1="4" x2="20" y1="12" y2="12"></line>
-                                    <line x1="4" x2="20" y1="6" y2="6"></line>
-                                    <line x1="4" x2="20" y1="18" y2="18"></line>
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                </header>
-                <main class="flex-grow">
-                    <div>
-                        <div class="bg-white shadow-sm">
-                            <div class="container mx-auto px-4 py-4">
-                                <div class="flex border-b mb-4">
-                                    <a href="buy.html">
-                                        <button class="px-6 py-2 text-gray-700 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600">
-                                            Купити
-                                        </button>
-                                    </a>
-                                    <a href="rent.html">
-                                        <button class="px-6 py-2 text-gray-700 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600">
-                                            Орендувати
-                                        </button>
-                                    </a>
-                                    <a href="new-builds.html">
-                                        <button class="px-6 py-2 text-gray-700 hover:text-blue-600 border-b-2 border-transparent hover:border-blue-600">
-                                            Новобудови та вторинний
-                                        </button>
-                                    </a>
-                                </div>
-                                <div class="flex items-center gap-2">
-                                    <div class="flex-1 relative">
-                                        <input type="text" placeholder="Місто, село, район, вулиця, метро..." class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500" value="" />
-                                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search w-5 h-5 text-gray-400">
-                                                <circle cx="11" cy="11" r="8"></circle>
-                                                <path d="m21 21-4.3-4.3"></path>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                    <button class="bg-orange-500 text-white px-6 py-2 rounded-full hover:bg-orange-600 transition-colors">
-                                        Шукати
-                                    </button>
-                                </div>
-                                <div class="flex justify-between mt-4">
-                                    <a href="houses.html">
-                                        <button class="flex flex-col items-center gap-1 px-4 py-2 rounded-lg bg-blue-100 text-blue-700">
-                                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
-                                            </svg><span class="text-sm">Квартири</span>
-                                        </button>
-                                    </a>
-                                    <a href="houses.html">
-                                        <button class="flex flex-col items-center gap-1 px-4 py-2 rounded-lg hover:bg-gray-100">
-                                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                            </svg><span class="text-sm">Будинки</span>
-                                        </button>
-                                    </a>
-                                    <a href="commercial.html">
-                                        <button class="flex flex-col items-center gap-1 px-4 py-2 rounded-lg hover:bg-gray-100">
-                                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-                                            </svg><span class="text-sm">Комерційна</span>
-                                        </button>
-                                    </a>
-                                    <a href="land.html">
-                                        <button class="flex flex-col items-center gap-1 px-4 py-2 rounded-lg hover:bg-gray-100">
-                                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                            </svg><span class="text-sm">Земля</span>
-                                        </button>
-                                    </a>
-                                </div>
-                        <section class="py-12 bg-gray-50">
-                            <div class="container mx-auto px-4">
-                                <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-12">
-                                    Популярні категорії нерухомості
-                                </h2>
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                                    <a class="block" href="./apartments.html">
-                                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
-                                            <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-blue-600">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-6 h-6 text-white">
-                                                    <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                    <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-semibold mb-2 text-gray-800">
-                                                Квартири
-                                            </h3>
-                                            <p class="text-gray-600">
-                                                Знайдіть ідеальну квартиру в новобудові або на вторинному
-                                                ринку
-                                            </p>
-                                        </div>
-                                    </a><a class="block" href="./houses.html">
-                                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
-                                            <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-green-600">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building w-6 h-6 text-white">
-                                                    <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-                                                    <path d="M9 22v-4h6v4"></path>
-                                                    <path d="M8 6h.01"></path>
-                                                    <path d="M16 6h.01"></path>
-                                                    <path d="M12 6h.01"></path>
-                                                    <path d="M12 10h.01"></path>
-                                                    <path d="M12 14h.01"></path>
-                                                    <path d="M16 10h.01"></path>
-                                                    <path d="M16 14h.01"></path>
-                                                    <path d="M8 10h.01"></path>
-                                                    <path d="M8 14h.01"></path>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-semibold mb-2 text-gray-800">
-                                                Будинки
-                                            </h3>
-                                            <p class="text-gray-600">
-                                                Приватні будинки та котеджі з власною територією
-                                            </p>
-                                        </div>
-                                    </a><a class="block" href="./commercial.html">
-                                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
-                                            <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-purple-600">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-building w-6 h-6 text-white">
-                                                    <rect width="16" height="20" x="4" y="2" rx="2" ry="2"></rect>
-                                                    <path d="M9 22v-4h6v4"></path>
-                                                    <path d="M8 6h.01"></path>
-                                                    <path d="M16 6h.01"></path>
-                                                    <path d="M12 6h.01"></path>
-                                                    <path d="M12 10h.01"></path>
-                                                    <path d="M12 14h.01"></path>
-                                                    <path d="M16 10h.01"></path>
-                                                    <path d="M16 14h.01"></path>
-                                                    <path d="M8 10h.01"></path>
-                                                    <path d="M8 14h.01"></path>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-semibold mb-2 text-gray-800">
-                                                Комерційна
-                                            </h3>
-                                            <p class="text-gray-600">
-                                                Приміщення для бізнесу: офіси, магазини, склади
-                                            </p>
-                                        </div>
-                                    </a><a class="block" href="./land.html">
-                                        <div class="bg-white rounded-lg shadow-sm p-6 border border-gray-100 hover:shadow-md transition-shadow">
-                                            <div class="w-12 h-12 rounded-lg flex items-center justify-center mb-4 bg-orange-500">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map w-6 h-6 text-white">
-                                                    <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"></polygon>
-                                                    <line x1="9" x2="9" y1="3" y2="18"></line>
-                                                    <line x1="15" x2="15" y1="6" y2="21"></line>
-                                                </svg>
-                                            </div>
-                                            <h3 class="text-lg font-semibold mb-2 text-gray-800">
-                                                Земельні ділянки
-                                            </h3>
-                                            <p class="text-gray-600">
-                                                Ділянки під забудову та сільськогосподарські землі
-                                            </p>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="py-12">
-                            <div class="container mx-auto px-4">
-                                <div class="flex justify-between items-center mb-8">
-                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-                                        Популярні пропозиції
-                                    </h2>
-                                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Переглянути все</a>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                    <a href="/property/1">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg" alt="2-кімнатна квартира з ремонтом" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">950&nbsp;000 грн</div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    2-кімнатна квартира з ремонтом
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Київ, Печерський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>2 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>65 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 4/9</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/2">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg" alt="Новий будинок у передмісті" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">
-                                                        2&nbsp;500&nbsp;000 грн
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    Новий будинок у передмісті
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Київ, Києво-Святошинський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>4 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>175 м²</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/4">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg" alt="1-кімнатна квартира з видом на парк" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Оренда</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">7&nbsp;500 грн/міс</div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    1-кімнатна квартира з видом на парк
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Одеса, Приморський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>1 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>45 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 7/12</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/6">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg" alt="3-кімнатна квартира після ремонту" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">
-                                                        1&nbsp;450&nbsp;000 грн
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    3-кімнатна квартира після ремонту
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Дніпро, Соборний</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>3 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>95 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 8/16</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="py-12">
-                            <div class="container mx-auto px-4">
-                                <h2 class="text-2xl md:text-3xl font-bold text-gray-800 mb-8">
-                                    Популярні міста
-                                </h2>
-                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-                                    <div class="relative group overflow-hidden rounded-lg">
-                                        <div class="aspect-[3/4] sm:aspect-[2/3] md:aspect-square lg:aspect-[3/2] bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/1059078/pexels-photo-1059078.jpeg&quot;);
-                        "></div>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                            <h3 class="text-xl font-bold">Київ</h3>
-                                            <p class="text-sm opacity-90">8745 пропозицій</p>
-                                        </div>
-                                    </div>
-                                    <div class="relative group overflow-hidden rounded-lg">
-                                        <div class="aspect-[3/4] sm:aspect-[2/3] md:aspect-square lg:aspect-[3/2] bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/3155666/pexels-photo-3155666.jpeg&quot;);
-                        "></div>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                            <h3 class="text-xl font-bold">Львів</h3>
-                                            <p class="text-sm opacity-90">3257 пропозицій</p>
-                                        </div>
-                                    </div>
-                                    <div class="relative group overflow-hidden rounded-lg">
-                                        <div class="aspect-[3/4] sm:aspect-[2/3] md:aspect-square lg:aspect-[3/2] bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/2570063/pexels-photo-2570063.jpeg&quot;);
-                        "></div>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                            <h3 class="text-xl font-bold">Одеса</h3>
-                                            <p class="text-sm opacity-90">4128 пропозицій</p>
-                                        </div>
-                                    </div>
-                                    <div class="relative group overflow-hidden rounded-lg">
-                                        <div class="aspect-[3/4] sm:aspect-[2/3] md:aspect-square lg:aspect-[3/2] bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/3052361/pexels-photo-3052361.jpeg&quot;);
-                        "></div>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                            <h3 class="text-xl font-bold">Харків</h3>
-                                            <p class="text-sm opacity-90">2936 пропозицій</p>
-                                        </div>
-                                    </div>
-                                    <div class="relative group overflow-hidden rounded-lg">
-                                        <div class="aspect-[3/4] sm:aspect-[2/3] md:aspect-square lg:aspect-[3/2] bg-cover bg-center transition-transform duration-500 group-hover:scale-110" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/3075993/pexels-photo-3075993.jpeg&quot;);
-                        "></div>
-                                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
-                                        <div class="absolute bottom-0 left-0 right-0 p-4 text-white">
-                                            <h3 class="text-xl font-bold">Дніпро</h3>
-                                            <p class="text-sm opacity-90">1874 пропозицій</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="py-12">
-                            <div class="container mx-auto px-4">
-                                <div class="flex justify-between items-center mb-8">
-                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-                                        Нерухомість на продаж
-                                    </h2>
-                                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Переглянути все</a>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                    <a href="/property/1">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg" alt="2-кімнатна квартира з ремонтом" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">950&nbsp;000 грн</div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    2-кімнатна квартира з ремонтом
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Київ, Печерський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>2 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>65 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 4/9</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/2">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/206172/pexels-photo-206172.jpeg" alt="Новий будинок у передмісті" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">
-                                                        2&nbsp;500&nbsp;000 грн
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    Новий будинок у передмісті
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Київ, Києво-Святошинський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>4 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>175 м²</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/5">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/63986/pexels-photo-63986.jpeg" alt="Земельна ділянка під забудову" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">320&nbsp;000 грн</div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    Земельна ділянка під забудову
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Київ, Голосіївський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>1200 м²</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/6">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg" alt="3-кімнатна квартира після ремонту" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">Продаж</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">
-                                                        1&nbsp;450&nbsp;000 грн
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    3-кімнатна квартира після ремонту
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Дніпро, Соборний</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>3 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>95 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 8/16</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="py-16 bg-gray-50">
-                            <div class="container mx-auto px-4">
-                                <div class="max-w-3xl mx-auto text-center mb-12">
-                                    <h2 class="text-3xl font-bold mb-4">Чому обирають ДІМ.UA?</h2>
-                                    <p class="text-gray-600 text-lg">
-                                        Найбільша база перевірених оголошень про нерухомість в Україні.
-                                        Ми працюємо, щоб зробити ваш пошук максимально комфортним.
-                                    </p>
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                                    <div class="flex flex-col items-center text-center p-4">
-                                        <div class="text-blue-600 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check w-10 h-10">
-                                                <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"></path>
-                                                <path d="m9 12 2 2 4-4"></path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-lg font-semibold mb-2">
-                                            Перевірені оголошення
-                                        </h3>
-                                        <p class="text-gray-600">
-                                            Уся нерухомість перевіряється нашими модераторами на
-                                            достовірність інформації
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col items-center text-center p-4">
-                                        <div class="text-blue-600 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-presentation w-10 h-10">
-                                                <path d="M2 3h20"></path>
-                                                <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3"></path>
-                                                <path d="m7 21 5-5 5 5"></path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-lg font-semibold mb-2">Актуальні ціни</h3>
-                                        <p class="text-gray-600">
-                                            Постійний моніторинг ринку дозволяє тримати найактуальніші
-                                            ціни на нерухомість
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col items-center text-center p-4">
-                                        <div class="text-blue-600 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock w-10 h-10">
-                                                <circle cx="12" cy="12" r="10"></circle>
-                                                <polyline points="12 6 12 12 16 14"></polyline>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-lg font-semibold mb-2">Швидкий пошук</h3>
-                                        <p class="text-gray-600">
-                                            Зручна система фільтрів дозволить швидко знайти відповідні
-                                            варіанти
-                                        </p>
-                                    </div>
-                                    <div class="flex flex-col items-center text-center p-4">
-                                        <div class="text-blue-600 mb-4">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users w-10 h-10">
-                                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
-                                                <circle cx="9" cy="7" r="4"></circle>
-                                                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
-                                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                                            </svg>
-                                        </div>
-                                        <h3 class="text-lg font-semibold mb-2">
-                                            Мільйони користувачів
-                                        </h3>
-                                        <p class="text-gray-600">
-                                            Щомісяця нашим сервісом користуються більше 3 мільйонів людей
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="py-12">
-                            <div class="container mx-auto px-4">
-                                <div class="flex justify-between items-center mb-8">
-                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-                                        Оренда нерухомості
-                                    </h2>
-                                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Переглянути все</a>
-                                </div>
-                                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                                    <a href="/property/3">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/1170412/pexels-photo-1170412.jpeg" alt="Офісне приміщення в бізнес-центрі" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Оренда</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">45&nbsp;000 грн/міс</div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    Офісне приміщення в бізнес-центрі
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Львів, Галицький</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>120 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 3/6</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a><a href="/property/4">
-                                        <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-md transition-shadow h-full transition-all duration-300 hover:translate-y-[-5px]">
-                                            <div class="relative">
-                                                <div class="relative aspect-[4/3] overflow-hidden">
-                                                    <img src="https://images.pexels.com/photos/2462015/pexels-photo-2462015.jpeg" alt="1-кімнатна квартира з видом на парк" class="absolute inset-0 w-full h-full object-cover" />
-                                                </div>
-                                                <div class="absolute top-2 left-2">
-                                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">Оренда</span>
-                                                </div>
-                                                <button class="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-white rounded-full shadow-md text-gray-500 hover:text-red-500 transition-colors">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-heart w-4 h-4">
-                                                        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
-                                                    </svg>
-                                                </button>
-                                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 text-white">
-                                                    <div class="font-bold text-lg">7&nbsp;500 грн/міс</div>
-                                                </div>
-                                            </div>
-                                            <div class="p-4">
-                                                <h3 class="text-lg font-semibold line-clamp-2">
-                                                    1-кімнатна квартира з видом на парк
-                                                </h3>
-                                                <div class="mt-2 flex items-start text-gray-500">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-4 h-4 mr-1 mt-0.5 flex-shrink-0">
-                                                        <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                                        <circle cx="12" cy="10" r="3"></circle>
-                                                    </svg><span class="text-sm">Одеса, Приморський</span>
-                                                </div>
-                                                <div class="mt-3 flex items-center justify-between text-sm">
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-home w-4 h-4 mr-1">
-                                                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                                                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                                                        </svg><span>1 кімн.</span>
-                                                    </div>
-                                                    <div class="flex items-center text-gray-600">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square w-4 h-4 mr-1">
-                                                            <rect width="18" height="18" x="3" y="3" rx="2"></rect>
-                                                        </svg><span>45 м²</span>
-                                                    </div>
-                                                    <div class="text-gray-600"><span>Пов. 7/12</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="py-12 bg-white">
-                            <div class="container mx-auto px-4">
-                                <div class="flex justify-between items-center mb-8">
-                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-800">
-                                        Новини ринку нерухомості
-                                    </h2>
-                                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium">Всі новини</a>
-                                </div>
-                                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                    <div class="bg-white overflow-hidden rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                                        <div class="h-48 bg-cover bg-center" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/186077/pexels-photo-186077.jpeg&quot;);
-                        "></div>
-                                        <div class="p-4">
-                                            <div class="text-sm text-gray-500 mb-2">15 липня 2025</div>
-                                            <h3 class="font-semibold text-lg mb-2 line-clamp-2">
-                                                Як зміняться ціни на нерухомість у 2025 році: прогнози
-                                                експертів
-                                            </h3>
-                                            <p class="text-gray-600 mb-4 line-clamp-3">
-                                                Експерти ринку нерухомості прогнозують зростання цін на 5-7%
-                                                у великих містах та стабілізацію цін у регіонах. Які фактори
-                                                впливатимуть на ринок нерухомості у 2025 році?
-                                            </p>
-                                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">Читати далі
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 ml-1">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="m12 5 7 7-7 7"></path>
-                                                </svg></a>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white overflow-hidden rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                                        <div class="h-48 bg-cover bg-center" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/681333/pexels-photo-681333.jpeg&quot;);
-                        "></div>
-                                        <div class="p-4">
-                                            <div class="text-sm text-gray-500 mb-2">10 липня 2025</div>
-                                            <h3 class="font-semibold text-lg mb-2 line-clamp-2">
-                                                Енергоефективні технології в сучасному будівництві
-                                            </h3>
-                                            <p class="text-gray-600 mb-4 line-clamp-3">
-                                                Нові підходи до будівництва житла дозволяють значно зменшити
-                                                витрати на енергію. Які технології використовують
-                                                забудовники для підвищення енергоефективності нових
-                                                будинків?
-                                            </p>
-                                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">Читати далі
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 ml-1">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="m12 5 7 7-7 7"></path>
-                                                </svg></a>
-                                        </div>
-                                    </div>
-                                    <div class="bg-white overflow-hidden rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
-                                        <div class="h-48 bg-cover bg-center" style="
-                          background-image: url(&quot;https://images.pexels.com/photos/6077326/pexels-photo-6077326.jpeg&quot;);
-                        "></div>
-                                        <div class="p-4">
-                                            <div class="text-sm text-gray-500 mb-2">5 липня 2025</div>
-                                            <h3 class="font-semibold text-lg mb-2 line-clamp-2">
-                                                Новий закон про оренду житла: що чекає на орендарів та
-                                                орендодавців
-                                            </h3>
-                                            <p class="text-gray-600 mb-4 line-clamp-3">
-                                                Парламент ухвалив новий закон, що регулює відносини на ринку
-                                                оренди житла. Які зміни чекають на учасників ринку і як вони
-                                                вплинуть на вартість оренди?
-                                            </p>
-                                            <a href="#" class="inline-flex items-center text-blue-600 hover:text-blue-800 font-medium">Читати далі
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-right w-4 h-4 ml-1">
-                                                    <path d="M5 12h14"></path>
-                                                    <path d="m12 5 7 7-7 7"></path>
-                                                </svg></a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
-                </main>
-                <footer class="bg-gray-800 text-gray-200">
-                    <div class="container mx-auto px-4 py-8">
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                            <div>
-                                <h3 class="text-xl font-bold mb-4">ДІМ.UA</h3>
-                                <p class="mb-4">
-                                    Найбільший сайт нерухомості в Україні. Щодня тисячі нових
-                                    пропозицій від власників та агентств нерухомості.
-                                </p>
-                                <div class="flex space-x-4">
-                                    <a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook">
-                                            <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                        </svg></a><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram">
-                                            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-                                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                            <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line>
-                                        </svg></a><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-youtube">
-                                            <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path>
-                                            <path d="m10 15 5-3-5-3z"></path>
-                                        </svg></a><a href="#" class="text-gray-300 hover:text-white"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin">
-                                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                            <rect width="4" height="12" x="2" y="9"></rect>
-                                            <circle cx="4" cy="4" r="2"></circle>
-                                        </svg></a>
-                                </div>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-4">Швидкі посилання</h3>
-                                <ul class="space-y-2">
-                                    <li><a class="hover:text-blue-400" href="#">Про нас</a></li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="#">Контакти</a>
-                                    </li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="#">Новини ринку</a>
-                                    </li>
-                                    <li><a class="hover:text-blue-400" href="#">Допомога</a></li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="#">Умови використання</a>
-                                    </li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="#">Політика конфіденційності</a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-4">Типи нерухомості</h3>
-                                <ul class="space-y-2">
-                                    <li>
-                                        <a class="hover:text-blue-400" href="./apartments.html">Квартири</a>
-                                    </li>
-                                    <li><a class="hover:text-blue-400" href="./houses.html">Будинки</a></li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="./commercial.html">Комерційна нерухомість</a>
-                                    </li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="./new-builds.html">Новобудови</a>
-                                    </li>
-                                    <li>
-                                        <a class="hover:text-blue-400" href="./land.html">Земельні ділянки</a>
-                                    </li>
-                                    <li><a class="hover:text-blue-400" href="#">Гаражі</a></li>
-                                </ul>
-                            </div>
-                            <div>
-                                <h3 class="text-lg font-semibold mb-4">Контактна інформація</h3>
-                                <ul class="space-y-3">
-                                    <li class="flex items-start">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin w-5 h-5 mr-2 mt-0.5">
-                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
-                                            <circle cx="12" cy="10" r="3"></circle>
-                                        </svg><span>вул. Хрещатик, 22, Київ, 01001</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-5 h-5 mr-2">
-                                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                        </svg><span>+380 44 123 45 67</span>
-                                    </li>
-                                    <li class="flex items-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-5 h-5 mr-2">
-                                            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
-                                            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
-                                        </svg><span>info@dim.ua</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="border-t border-gray-700 mt-8 pt-6 text-sm text-center text-gray-400">
-                            <p>© 2025 ДІМ.UA. Всі права захищені.</p>
-                        </div>
-                    </div>
-                </footer>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">DIM.RIA</a>
             </div>
-        </div>
+            <ul class="nav-links">
+                <li><a href="#">Купити</a></li>
+                <li><a href="#">Орендувати</a></li>
+                <li><a href="#">Продати</a></li>
+                <li><a href="#">Від забудовника</a></li>
+                <li><a href="login.html" class="login-link">Увійти</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero-section">
+            <h1>Перевірена нерухомість на мапі</h1>
+            <p class="hero-description">Обирайте перевірену нерухомість у перевірених фахівців</p>
+            <div class="search-container">
+                <div class="search-type">
+                    <select name="property-type">
+                        <option value="apartment">Купити квартиру</option>
+                        <option value="house">Купити будинок</option>
+                        <option value="commercial">Комерційна нерухомість</option>
+                    </select>
+                </div>
+                <div class="search-type">
+                    <select name="property-category">
+                        <option value="">Новобудови та вторинний</option>
+                        <option value="new">Новобудови</option>
+                        <option value="secondary">Вторинний ринок</option>
+                    </select>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="Місто, село, район, вулиця, метро..." class="search-field">
+                    <button class="search-button">Шукати</button>
+                </div>
+            </div>
+        </section>
 
-    </div>
+        <section class="properties">
+            <h2>Рекомендовані пропозиції</h2>
+            <div class="property-grid">
+                <div class="property-card">
+                    <img src="images/kv/kv1.jpg" alt="Квартира">
+                    <div class="property-info">
+                        <div class="price">1 420 000 грн <span class="price-per-meter">• 28 980 грн за м²</span></div>
+                        <h3>вул. Віктора Френчко</h3>
+                        <p class="location">Старий Автовокзал • Кропивницький</p>
+                        <p class="details">3 кімнати • 49 м²</p>
+                        <div class="tags">
+                            <span class="tag">Спокійний район</span>
+                            <span class="tag">Тихий двір</span>
+                            <span class="tag">Поруч з парком</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <img src="images/kv/kv2.jpg" alt="Квартира">
+                    <div class="property-info">
+                        <div class="price">1 076 000 грн <span class="price-per-meter">• 34 710 грн за м²</span></div>
+                        <h3>вул. Героїв-рятувальників</h3>
+                        <p class="location">Фортечний • Кропивницький</p>
+                        <p class="details">1 кімната • 31 м²</p>
+                        <div class="tags">
+                            <span class="tag">Тихий двір</span>
+                            <span class="tag">Поруч з парком</span>
+                            <span class="tag">Торг можливий</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="verified-badge">ПЕРЕВІРЕНА КВАРТИРА</div>
+                    <img src="images/kv/kv3.jpg" alt="Квартира">
+                    <div class="property-info">
+                        <div class="price">12 000 грн</div>
+                        <h3>вул. Корольова Академіка</h3>
+                        <p class="location">Фортечний • Кропивницький</p>
+                        <p class="details">2 кімнати • 55 м²</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="realtors-section">
+            <h2>Рейтинг ріелторів</h2>
+            <div class="realtors-grid">
+                <div class="realtor-card">
+                    <img src="images/rieltors/riel1.jpg" alt="Олена Петренко" class="realtor-photo">
+                    <div class="realtor-info">
+                        <h3>Олена Петренко</h3>
+                        <p>Приватний ріелтор</p>
+                    </div>
+                </div>
+                <div class="realtor-card">
+                    <img src="images/rieltors/riel2.jpg" alt="Марія Ковальчук" class="realtor-photo">
+                    <div class="realtor-info">
+                        <h3>Марія Ковальчук</h3>
+                        <p>Приватний ріелтор</p>
+                    </div>
+                </div>
+                <div class="realtor-card">
+                    <img src="images/rieltors/riel3.jpg" alt="Андрій Мельник" class="realtor-photo">
+                    <div class="realtor-info">
+                        <h3>Андрій Мельник</h3>
+                        <p>Агенція SWEET HOME</p>
+                    </div>
+                </div>
+                <a href="#" class="view-all-button">Дивитися усіх ріелторів</a>
+            </div>
+        </section>
+
+        <section class="developers-section">
+            <h2>Популярні забудовники</h2>
+            <div class="developers-grid">
+                <div class="developer-card">
+                    <img src="images/zabudovniki/zb1.jpg" alt="LEV Development" class="developer-logo">
+                    <div class="developer-info">
+                        <h3>LEV Development</h3>
+                        <p>16 об'єктів</p>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <img src="images/zabudovniki/zb2.jpg" alt="РІЕЛ" class="developer-logo">
+                    <div class="developer-info">
+                        <h3>РІЕЛ</h3>
+                        <p>34 об'єкта</p>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <img src="images/zabudovniki/zb3.jpg" alt="Альянс Новобуд" class="developer-logo">
+                    <div class="developer-info">
+                        <h3>Альянс Новобуд</h3>
+                        <p>9 об'єктів</p>
+                    </div>
+                </div>
+                <a href="#" class="view-all-button">Дивитися усіх забудовників</a>
+            </div>
+        </section>
+
+        <section class="agencies-section">
+            <h2>Рейтинг агенцій нерухомості</h2>
+            <div class="agencies-grid">
+                <div class="agency-card">
+                    <img src="images/agents/ag1.jpg" alt="VALION" class="agency-logo">
+                    <div class="agency-info">
+                        <h3>VALION</h3>
+                        <p>Продаж квартир</p>
+                    </div>
+                </div>
+                <div class="agency-card">
+                    <img src="images/agents/ag2.jpg" alt="THE Capital" class="agency-logo">
+                    <div class="agency-info">
+                        <h3>THE Capital</h3>
+                        <p>Продаж квартир</p>
+                    </div>
+                </div>
+                <div class="agency-card">
+                    <img src="images/agents/ag3.jpg" alt="PRIMES" class="agency-logo">
+                    <div class="agency-info">
+                        <h3>PRIMES</h3>
+                        <p>Довгострокова оренда квартир</p>
+                    </div>
+                </div>
+                <a href="#" class="view-all-button">Дивитися усі агенції</a>
+            </div>
+        </section>
+    </main>
 </body>
-</html>
+</html> 
