@@ -13,9 +13,8 @@ const h1FontSize = h1 ? getComputedStyle(h1).fontSize : 'N/A';
 console.log('font-size <h1>:', h1FontSize);
 
 (function addHoverBackgroundToggler() {
-    const allElements = document.querySelectorAll('*');
-
-    allElements.forEach((element) => {
+    const hoverables = document.querySelectorAll('.hoverable-red');
+    hoverables.forEach((element) => {
         element.addEventListener('mouseenter', function () {
             const currentBg = getComputedStyle(this).backgroundColor;
             if (!this.dataset.prevBgColor) {
@@ -37,6 +36,10 @@ console.log('font-size <h1>:', h1FontSize);
         'images/kv/kv2.jpg',
         'images/kv/kv3.jpg'
     ]; 
+
+    const enableHeroImages = false;
+
+    if (!enableHeroImages) return;
 
     window.addEventListener('load', () => {
         setTimeout(() => {
