@@ -28,7 +28,13 @@
             <form id="login-form" class="auth-form">
                 <h2>Вхід в акаунт</h2>
                 <div class="form-group">
-                    <input type="email" placeholder="Email" required>
+                    <input id="login" type="text" placeholder="Login" required>
+                </div>
+                <div class="form-group">
+                    <input id="email" type="email" placeholder="Email" required>
+                </div>
+                <div class="form-group">
+                    <input id="phone" type="tel" placeholder="Phone" required>
                 </div>
                 <div class="form-group">
                     <input type="password" placeholder="Пароль" required>
@@ -50,5 +56,6 @@
             </form>
         </div>
     </main>
+    <script src="scripts/login.js"></script>
 </body>
 </html> 
