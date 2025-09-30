@@ -29,4 +29,39 @@ console.log('font-size <h1>:', h1FontSize);
             this.style.backgroundColor = prev;
         });
     });
+})();
+
+(function loadImagesWithDelay() {
+    const imagesUrl = [
+        'images/kv/kv1.jpg',
+        'images/kv/kv2.jpg',
+        'images/kv/kv3.jpg'
+    ]; 
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const parent = document.querySelector('.hero-section');
+            if (!parent) return;
+
+            const fragment = document.createDocumentFragment();
+
+            imagesUrl.forEach((url, index) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = 'Додаткове зображення';
+                img.style.maxWidth = '120px';
+                img.style.marginRight = '8px';
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 300ms ease';
+
+                setTimeout(() => {
+                    fragment.appendChild(img);
+                    parent.appendChild(fragment);
+                    requestAnimationFrame(() => {
+                        img.style.opacity = '1';
+                    });
+                }, index * 1000);
+            });
+        }, 5000);
+    });
 })(); 
