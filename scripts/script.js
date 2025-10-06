@@ -68,3 +68,49 @@ console.log('font-size <h1>:', h1FontSize);
         }, 5000);
     });
 })(); 
+
+(function comparePhrasesWithSet() {
+    let previousPhraseSet = null;
+
+    function normalize(text) {
+        return text
+            .toLowerCase()
+            .replace(/[.,!?;:()\[\]{}"'`«»]/g, ' ')
+            .split(/\s+/)
+            .filter(Boolean);
+    }
+
+    function toSet(words) {
+        return new Set(words);
+    }
+
+    function intersectSets(a, b) {
+        const result = [];
+        for (const item of a) {
+            if (b.has(item)) result.push(item);
+        }
+        return result;
+    }
+
+    window.addEventListener('load', () => {
+        const input = document.getElementById('phrase-input');
+        const button = document.getElementById('compare-btn');
+        const resultBox = document.getElementById('compare-result');
+        if (!input || !button || !resultBox) return;
+
+        button.addEventListener('click', () => {
+            const words = normalize(input.value);
+            const currentSet = toSet(words);
+
+            if (previousPhraseSet) {
+                const common = intersectSets(previousPhraseSet, currentSet);
+                resultBox.textContent = common.length ? `Спільні слова: ${common.join(', ')}` : 'Спільних слів немає';
+            } else {
+                resultBox.textContent = 'Збережено першу фразу. Введіть наступну для порівняння.';
+            }
+            previousPhraseSet = currentSet;
+            input.value = '';
+            input.focus();
+        });
+    });
+})(); 
