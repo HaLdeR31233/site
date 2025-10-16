@@ -1,191 +1,151 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Перевірена нерухомість на мапі</title>
-    <link rel="stylesheet" href="styles/normalize.css">
-    <link rel="stylesheet" href="styles/styles.css">
-</head>
-<body>
-    <header>
-        <nav class="navbar">
-            <div class="logo">
-                <a href="index.html">DIM.RIA</a>
-            </div>
-            <ul class="nav-links">
-                <li><a href="#">Купити</a></li>
-                <li><a href="#">Орендувати</a></li>
-                <li><a href="#">Продати</a></li>
-                <li><a href="#">Від забудовника</a></li>
-                <li><a href="login.html" class="login-link">Увійти</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section class="hero-section">
-            <h1>Перевірена нерухомість на мапі</h1>
-            <p class="hero-description">Обирайте перевірену нерухомість у перевірених фахівців</p>
-            <div class="search-container">
-                <div class="search-type">
-                    <select name="property-type">
-                        <option value="apartment">Купити квартиру</option>
-                        <option value="house">Купити будинок</option>
-                        <option value="commercial">Комерційна нерухомість</option>
-                    </select>
-                </div>
-                <div class="search-type">
-                    <select name="property-category">
-                        <option value="">Новобудови та вторинний</option>
-                        <option value="new">Новобудови</option>
-                        <option value="secondary">Вторинний ринок</option>
-                    </select>
-                </div>
-                <div class="search-input">
-                    <input type="text" placeholder="Місто, село, район, вулиця, метро..." class="search-field">
-                    <button class="search-button">Шукати</button>
-                </div>
-            </div>
-            <div class="set-compare">
-                <input id="phrase-input" type="text" placeholder="Введіть фразу..." class="search-field">
-                <button id="compare-btn" class="search-button" type="button">Порівняти зі збереженою</button>
-                <div id="compare-result" class="compare-result"></div>
-            </div>
-            <div class="api-demo">
-                <button id="dog-btn" class="search-button" type="button">Показати випадкового собаку</button>
-                <div id="dog-result" class="dog-result" style="margin-top:8px;"></div>
-            </div>
-        </section>
+const paragraphCount = document.querySelectorAll('p').length;
+console.log('Кількість <p>:', paragraphCount);
 
-        <section class="properties">
-            <h2>Рекомендовані пропозиції</h2>
-            <div class="property-grid">
-                <div class="property-card">
-                    <img src="images/kv/kv1.jpg" alt="Квартира">
-                    <div class="property-info">
-                        <div class="price">1 420 000 грн <span class="price-per-meter">• 28 980 грн за м²</span></div>
-                        <h3>вул. Віктора Френчко</h3>
-                        <p class="location">Старий Автовокзал • Кропивницький</p>
-                        <p class="details">3 кімнати • 49 м²</p>
-                        <div class="tags">
-                            <span class="tag">Спокійний район</span>
-                            <span class="tag">Тихий двір</span>
-                            <span class="tag">Поруч з парком</span>
-                        </div>
-                    </div>
-                </div>
+const h2Count = document.querySelectorAll('h2').length;
+console.log('Кількість <h2>:', h2Count);
 
-                <div class="property-card">
-                    <img src="images/kv/kv2.jpg" alt="Квартира">
-                    <div class="property-info">
-                        <div class="price">1 076 000 грн <span class="price-per-meter">• 34 710 грн за м²</span></div>
-                        <h3>вул. Героїв-рятувальників</h3>
-                        <p class="location">Фортечний • Кропивницький</p>
-                        <p class="details">1 кімната • 31 м²</p>
-                        <div class="tags">
-                            <span class="tag">Тихий двір</span>
-                            <span class="tag">Поруч з парком</span>
-                            <span class="tag">Торг можливий</span>
-                        </div>
-                    </div>
-                </div>
+const bodyBg = getComputedStyle(document.body).backgroundColor;
+console.log('background-color <body>:', bodyBg);
 
-                <div class="property-card">
-                    <div class="verified-badge">ПЕРЕВІРЕНА КВАРТИРА</div>
-                    <img src="images/kv/kv3.jpg" alt="Квартира">
-                    <div class="property-info">
-                        <div class="price">12 000 грн</div>
-                        <h3>вул. Корольова Академіка</h3>
-                        <p class="location">Фортечний • Кропивницький</p>
-                        <p class="details">2 кімнати • 55 м²</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="realtors-section">
-            <h2>Рейтинг ріелторів</h2>
-            <div class="realtors-grid">
-                <div class="realtor-card">
-                    <img src="images/rieltors/riel1.jpg" alt="Олена Петренко" class="realtor-photo">
-                    <div class="realtor-info">
-                        <h3>Олена Петренко</h3>
-                        <p>Приватний ріелтор</p>
-                    </div>
-                </div>
-                <div class="realtor-card">
-                    <img src="images/rieltors/riel2.jpg" alt="Марія Ковальчук" class="realtor-photo">
-                    <div class="realtor-info">
-                        <h3>Марія Ковальчук</h3>
-                        <p>Приватний ріелтор</p>
-                    </div>
-                </div>
-                <div class="realtor-card">
-                    <img src="images/rieltors/riel3.jpg" alt="Андрій Мельник" class="realtor-photo">
-                    <div class="realtor-info">
-                        <h3>Андрій Мельник</h3>
-                        <p>Агенція SWEET HOME</p>
-                    </div>
-                </div>
-                <a href="#" class="view-all-button">Дивитися усіх ріелторів</a>
-            </div>
-        </section>
+const h1 = document.querySelector('h1');
 
-        <section class="developers-section">
-            <h2>Популярні забудовники</h2>
-            <div class="developers-grid">
-                <div class="developer-card">
-                    <img src="images/zabudovniki/zb1.jpg" alt="LEV Development" class="developer-logo">
-                    <div class="developer-info">
-                        <h3>LEV Development</h3>
-                        <p>16 об'єктів</p>
-                    </div>
-                </div>
-                <div class="developer-card">
-                    <img src="images/zabudovniki/zb2.jpg" alt="РІЕЛ" class="developer-logo">
-                    <div class="developer-info">
-                        <h3>РІЕЛ</h3>
-                        <p>34 об'єкта</p>
-                    </div>
-                </div>
-                <div class="developer-card">
-                    <img src="images/zabudovniki/zb3.jpg" alt="Альянс Новобуд" class="developer-logo">
-                    <div class="developer-info">
-                        <h3>Альянс Новобуд</h3>
-                        <p>9 об'єктів</p>
-                    </div>
-                </div>
-                <a href="#" class="view-all-button">Дивитися усіх забудовників</a>
-            </div>
-        </section>
+const h1FontSize = h1 ? getComputedStyle(h1).fontSize : 'N/A';
+console.log('font-size <h1>:', h1FontSize);
 
-        <section class="agencies-section">
-            <h2>Рейтинг агенцій нерухомості</h2>
-            <div class="agencies-grid">
-                <div class="agency-card">
-                    <img src="images/agents/ag1.jpg" alt="VALION" class="agency-logo">
-                    <div class="agency-info">
-                        <h3>VALION</h3>
-                        <p>Продаж квартир</p>
-                    </div>
-                </div>
-                <div class="agency-card">
-                    <img src="images/agents/ag2.jpg" alt="THE Capital" class="agency-logo">
-                    <div class="agency-info">
-                        <h3>THE Capital</h3>
-                        <p>Продаж квартир</p>
-                    </div>
-                </div>
-                <div class="agency-card">
-                    <img src="images/agents/ag3.jpg" alt="PRIMES" class="agency-logo">
-                    <div class="agency-info">
-                        <h3>PRIMES</h3>
-                        <p>Довгострокова оренда квартир</p>
-                    </div>
-                </div>
-                <a href="#" class="view-all-button">Дивитися усі агенції</a>
-            </div>
-        </section>
-    </main>
-    <script src="scripts/script.js"></script>
-</body>
-</html> 
+(function addHoverBackgroundToggler() {
+    const hoverables = document.querySelectorAll('.hoverable-red');
+    hoverables.forEach((element) => {
+        element.addEventListener('mouseenter', function () {
+            const currentBg = getComputedStyle(this).backgroundColor;
+            if (!this.dataset.prevBgColor) {
+                this.dataset.prevBgColor = currentBg;
+            }
+            this.style.backgroundColor = 'red';
+        });
+
+        element.addEventListener('mouseleave', function () {
+            const prev = this.dataset.prevBgColor || '';
+            this.style.backgroundColor = prev;
+        });
+    });
+})();
+
+(function loadImagesWithDelay() {
+    const imagesUrl = [
+        'images/kv/kv1.jpg',
+        'images/kv/kv2.jpg',
+        'images/kv/kv3.jpg'
+    ]; 
+
+    const enableHeroImages = false;
+
+    if (!enableHeroImages) return;
+
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            const parent = document.querySelector('.hero-section');
+            if (!parent) return;
+
+            const fragment = document.createDocumentFragment();
+
+            imagesUrl.forEach((url, index) => {
+                const img = document.createElement('img');
+                img.src = url;
+                img.alt = 'Додаткове зображення';
+                img.style.maxWidth = '120px';
+                img.style.marginRight = '8px';
+                img.style.opacity = '0';
+                img.style.transition = 'opacity 300ms ease';
+
+                setTimeout(() => {
+                    fragment.appendChild(img);
+                    parent.appendChild(fragment);
+                    requestAnimationFrame(() => {
+                        img.style.opacity = '1';
+                    });
+                }, index * 1000);
+            });
+        }, 5000);
+    });
+})(); 
+
+(function comparePhrasesWithSet() {
+    let previousPhraseSet = null;
+
+    function normalize(text) {
+        return text
+            .toLowerCase()
+            .replace(/[.,!?;:()\[\]{}"'`«»]/g, ' ')
+            .split(/\s+/)
+            .filter(Boolean);
+    }
+
+    function toSet(words) {
+        return new Set(words);
+    }
+
+    function intersectSets(a, b) {
+        const result = [];
+        for (const item of a) {
+            if (b.has(item)) result.push(item);
+        }
+        return result;
+    }
+
+    window.addEventListener('load', () => {
+        const input = document.getElementById('phrase-input');
+        const button = document.getElementById('compare-btn');
+        const resultBox = document.getElementById('compare-result');
+        if (!input || !button || !resultBox) return;
+
+        button.addEventListener('click', () => {
+            const words = normalize(input.value);
+            const currentSet = toSet(words);
+
+            if (previousPhraseSet) {
+                const common = intersectSets(previousPhraseSet, currentSet);
+                resultBox.textContent = common.length ? `Спільні слова: ${common.join(', ')}` : 'Спільних слів немає';
+            } else {
+                resultBox.textContent = 'Збережено першу фразу. Введіть наступну для порівняння.';
+            }
+            previousPhraseSet = currentSet;
+            input.value = '';
+            input.focus();
+        });
+    });
+})(); 
+
+(function dogApiDemo() {
+    async function fetchRandomDog() {
+        const resultBox = document.getElementById('dog-result');
+        if (!resultBox) return;
+        resultBox.textContent = 'Завантаження...';
+        try {
+            const resp = await fetch('https://dog.ceo/api/breeds/image/random');
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            const data = await resp.json();
+            if (data && data.message) {
+                const img = document.createElement('img');
+                img.src = data.message;
+                img.alt = 'Dog';
+                img.style.maxWidth = '260px';
+                img.style.borderRadius = '8px';
+                img.style.display = 'block';
+                img.style.marginTop = '6px';
+                resultBox.innerHTML = '';
+                resultBox.appendChild(img);
+            } else {
+                resultBox.textContent = 'Не вдалося отримати зображення.';
+            }
+        } catch (e) {
+            resultBox.textContent = 'Помилка завантаження: ' + e.message;
+        }
+    }
+
+    window.addEventListener('load', () => {
+        const btn = document.getElementById('dog-btn');
+        if (btn) {
+            btn.addEventListener('click', fetchRandomDog);
+        }
+    });
+})(); 
