@@ -67,7 +67,7 @@ console.log('font-size <h1>:', h1FontSize);
             });
         }, 5000);
     });
-})(); 
+})();
 
 (function comparePhrasesWithSet() {
     let previousPhraseSet = null;
@@ -113,4 +113,40 @@ console.log('font-size <h1>:', h1FontSize);
             input.focus();
         });
     });
-})(); 
+})();
+
+(function dogApiDemo() {
+    async function fetchRandomDog() {
+        const resultBox = document.getElementById('dog-result');
+        if (!resultBox) return;
+        resultBox.textContent = 'Завантаження...';
+        
+        try {
+            // Используем Lorem Picsum для случайных изображений
+            const resp = await fetch('https://picsum.photos/300/200?random=' + Date.now());
+            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            
+            const img = document.createElement('img');
+            img.src = resp.url;
+            img.alt = 'Random Image';
+            img.style.maxWidth = '260px';
+            img.style.borderRadius = '8px';
+            img.style.display = 'block';
+            img.style.marginTop = '6px';
+            img.style.border = '2px solid #ddd';
+            resultBox.innerHTML = '';
+            resultBox.appendChild(img);
+            
+        } catch (e) {
+            console.error('API Error:', e);
+            resultBox.textContent = 'Помилка завантаження: ' + e.message;
+        }
+    }
+
+    window.addEventListener('load', () => {
+        const btn = document.getElementById('dog-btn');
+        if (btn) {
+            btn.addEventListener('click', fetchRandomDog);
+        }
+    });
+})();
