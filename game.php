@@ -84,7 +84,7 @@
             <div class="score">Очки: <span id="score">0</span></div>
             <div class="lives">Жизни: <span id="lives">3</span></div>
             <div class="controls">
-                <h3>Управление:</h3>
+                <h3>🎮 Управление:</h3>
                 <ul>
                     <li>↑/W/Ц - Газ</li>
                     <li>↓/S/Ы - Тормоз</li>
@@ -92,7 +92,7 @@
                     <li>→/D/В - Вправо</li>
                     <li>Пробел/H - Сигнал</li>
                 </ul>
-                <h3>Цель:</h3>
+                <h3>🎯 Цель:</h3>
                 <p>Собирайте монеты, избегайте препятствий!</p>
             </div>
         </div>
@@ -104,6 +104,6 @@
         <button class="restart-btn" onclick="restartGame()">Начать заново</button>
     </div>
 
-    <script src="game.js"></script>
+    <script src="./game.js"></script>
 </body>
 </html>
