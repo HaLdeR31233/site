@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo htmlspecialchars($pageTitle ?? 'Перевірена нерухомість на мапі'); ?></title>
+    <link rel="stylesheet" href="styles/normalize.css">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="/">DIM.RIA</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/"<?php echo ($currentPath === 'home' || $currentPath === '') ? ' class="active"' : ''; ?>>Головна</a></li>
+                <li><a href="/login"<?php echo ($currentPath === 'login') ? ' class="active"' : ''; ?>>Увійти</a></li>
+                <li><a href="/register"<?php echo ($currentPath === 'register') ? ' class="active"' : ''; ?>>Реєстрація</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="hero-section">
+            <h1>Перевірена нерухомість на мапі</h1>
+            <p class="hero-description">Обирайте перевірену нерухомість у перевірених фахівців</p>
+            <div class="search-container">
+                <div class="search-type">
+                    <select name="property-type">
+                        <option value="apartment">Купити квартиру</option>
+                        <option value="house">Купити будинок</option>
+                        <option value="commercial">Комерційна нерухомість</option>
+                    </select>
+                </div>
+                <div class="search-type">
+                    <select name="property-category">
+                        <option value="">Новобудови та вторинний</option>
+                        <option value="new">Новобудови</option>
+                        <option value="secondary">Вторинний ринок</option>
+                    </select>
+                </div>
+                <div class="search-input">
+                    <input type="text" placeholder="Місто, село, район, вулиця, метро..." class="search-field">
+                    <button class="search-button">Шукати</button>
+                </div>
+            </div>
+            <div class="set-compare">
+                <input id="phrase-input" type="text" placeholder="Введіть фразу..." class="search-field">
+                <button id="compare-btn" class="search-button" type="button">Порівняти зі збереженою</button>
+                <div id="compare-result" class="compare-result"></div>
+            </div>
+            <div class="api-demo">
+                <button id="dog-btn" class="search-button" type="button">Показати випадкову фотку</button>
+                <div id="dog-result" class="dog-result" style="margin-top:8px;"></div>
+            </div>
+        </section>
+
+        <section class="properties">
+            <h2>Рекомендовані пропозиції</h2>
+            <div class="property-grid">
+                <div class="property-card">
+                    <img src="images/kv/kv1.jpg" alt="Квартира">
+                    <div class="property-info">
+                        <div class="price">1 420 000 грн <span class="price-per-meter">• 28 980 грн за м²</span></div>
+                        <h3>вул. Віктора Френчко</h3>
+                        <p class="location">Старий Автовокзал • Кропивницький</p>
+                        <p class="details">3 кімнати • 49 м²</p>
+                        <div class="tags">
+                            <span class="tag">Спокійний район</span>
+                            <span class="tag">Тихий двір</span>
+                            <span class="tag">Поруч з парком</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <img src="images/kv/kv2.jpg" alt="Квартира">
+                    <div class="property-info">
+                        <div class="price">1 076 000 грн <span class="price-per-meter">• 34 710 грн за м²</span></div>
+                        <h3>вул. Героїв-рятувальників</h3>
+                        <p class="location">Фортечний • Кропивницький</p>
+                        <p class="details">1 кімната • 31 м²</p>
+                        <div class="tags">
+                            <span class="tag">Тихий двір</span>
+                            <span class="tag">Поруч з парком</span>
+                            <span class="tag">Торг можливий</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="property-card">
+                    <div class="verified-badge">ПЕРЕВІРЕНА КВАРТИРА</div>
+                    <img src="images/kv/kv3.jpg" alt="Квартира">
+                    <div class="property-info">
+                        <div class="price">12 000 грн</div>
+                        <h3>вул. Корольова Академіка</h3>
+                        <p class="location">Фортечний • Кропивницький</p>
+                        <p class="details">2 кімнати • 55 м²</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="realtors-section">
+            <h2>Рейтинг ріелторів</h2>
+            <div class="realtors-grid">
+                <div class="realtor-card">
+                    <img src="images/rieltors/riel1.jpg" alt="Олена Петренко" class="realtor-photo">
+                    <div class="realtor-info">
+                        <h3>Олена Петренко</h3>
+                        <p>Приватний ріелтор</p>
+                    </div>
+                </div>
+                <div class="realtor-card">
+                    <img src="images/rieltors/riel2.jpg" alt="Марія Ковальчук" class="realtor-photo">
+                    <div class="realtor-info">
+                        <h3>Марія Ковальчук</h3>
+                        <p>Приватний ріелтор</p>
+                    </div>
+                </div>
+                <div class="realtor-card">
+                    <img src="images/rieltors/riel3.jpg" alt="Андрій Мельник" class="realtor-photo">
+                    <div class="realtor-info">
+                        <h3>Андрій Мельник</h3>
+                        <p>Агенція SWEET HOME</p>
+                    </div>
+                </div>
+                <a href="#" class="view-all-button">Дивитися усіх ріелторів</a>
+            </div>
+        </section>
+
+        <section class="developers-section">
+            <h2>Популярні забудовники</h2>
+            <div class="developers-grid">
+                <div class="developer-card">
+                    <img src="images/zabudovniki/zb1.jpg" alt="LEV Development" class="developer-logo">
+                    <div class="developer-info">
+                        <h3>LEV Development</h3>
+                        <p>16 об'єктів</p>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <img src="images/zabudovniki/zb2.jpg" alt="РІЕЛ" class="developer-logo">
+                    <div class="developer-info">
+                        <h3>РІЕЛ</h3>
+                        <p>34 об'єкта</p>
+                    </div>
+                </div>
+                <div class="developer-card">
+                    <img src="images/zabudovniki/zb3.jpg" alt="Альянс Новобуд" class="developer-logo">
+                    <div class="developer-info">
+                        <h3>Альянс Новобуд</h3>
+                        <p>9 об'єктів</p>
+                    </div>
+                </div>
+                <a href="#" class="view-all-button">Дивитися усіх забудовників</a>
+            </div>
+        </section>
+
+        <section class="agencies-section">
+            <h2>Рейтинг агенцій нерухомості</h2>
+            <div class="agencies-grid">
+                <div class="agency-card">
+                    <img src="images/agents/ag1.jpg" alt="VALION" class="agency-logo">
+                    <div class="agency-info">
+                        <h3>VALION</h3>
+                        <p>Продаж квартир</p>
+                    </div>
+                </div>
+                <div class="agency-card">
+                    <img src="images/agents/ag2.jpg" alt="THE Capital" class="agency-logo">
+                    <div class="agency-info">
+                        <h3>THE Capital</h3>
+                        <p>Продаж квартир</p>
+                    </div>
+                </div>
+                <div class="agency-card">
+                    <img src="images/agents/ag3.jpg" alt="PRIMES" class="agency-logo">
+                    <div class="agency-info">
+                        <h3>PRIMES</h3>
+                        <p>Довгострокова оренда квартир</p>
+                    </div>
+                </div>
+                <a href="#" class="view-all-button">Дивитися усі агенції</a>
+            </div>
+        </section>
+    </main>
+    <script src="scripts/script.js"></script>
+</body>
+</html>
