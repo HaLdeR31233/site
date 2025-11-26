@@ -27,6 +27,7 @@ class Database
                 self::$connection = new PDO("sqlite:{$dbPath}");
 
                 self::createUsersTable();
+                self::createPropertiesTable();
             } elseif ($dbType === 'mysql') {
                 $host = $_ENV['DB_HOST'] ?? 'localhost';
                 $dbname = $_ENV['DB_NAME'] ?? 'composer_app';
@@ -63,6 +64,30 @@ class Database
                 password VARCHAR(255) NOT NULL,
                 name VARCHAR(255) NOT NULL,
                 created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            )
+        ";
+
+        $stmt = self::$connection->prepare($sql);
+        $stmt->execute();
+    }
+
+    private static function createPropertiesTable(): void
+    {
+        $sql = "
+            CREATE TABLE IF NOT EXISTS properties (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                title VARCHAR(255) NOT NULL,
+                description TEXT,
+                address VARCHAR(500) NOT NULL,
+                price DECIMAL(10,2) NOT NULL,
+                rooms INTEGER DEFAULT 1,
+                area DECIMAL(8,2) DEFAULT 0.00,
+                type VARCHAR(50) DEFAULT 'apartment',
+                status VARCHAR(20) DEFAULT 'available',
+                user_id INTEGER,
+                created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
             )
         ";
 
