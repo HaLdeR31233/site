@@ -7,6 +7,7 @@ use App\Classes\HomePageController;
 use App\Classes\LoginController;
 use App\Classes\AuthController;
 use App\Classes\ErrorController;
+use App\Classes\RegisterController;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\VarDumper\VarDumper;
@@ -43,6 +44,15 @@ try {
                 $controller->login();
             } else {
                 $controller->showLoginForm();
+            }
+            break;
+
+        case 'register':
+            $controller = new RegisterController($viewer, $logger);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $controller->register();
+            } else {
+                $controller->showRegisterForm();
             }
             break;
 
