@@ -1,0 +1,30 @@
+﻿{
+    "name": "halder31233/composer",
+    "description": "DIM.RIA - PHP project with Composer for verified real estate on map",
+    "type": "project",
+    "authors": [
+        {
+            "name": "HaLdeR31233",
+            "email": "halder31233@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=8.1",
+        "monolog/monolog": "^3.0",
+        "symfony/var-dumper": "^6.0",
+        "nesbot/carbon": "^2.0",
+        "latte/latte": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "prefer-stable": true,
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

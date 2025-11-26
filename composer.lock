@@ -1,0 +1,41 @@
+﻿{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "1234567890abcdef",
+    "packages": [
+        {
+            "name": "monolog/monolog",
+            "version": "3.9.0",
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services"
+        },
+        {
+            "name": "symfony/var-dumper",
+            "version": "v6.4.26",
+            "description": "Provides mechanisms for walking through any arbitrary PHP variable"
+        },
+        {
+            "name": "nesbot/carbon",
+            "version": "2.73.0",
+            "description": "A simple PHP API extension for DateTime."
+        },
+        {
+            "name": "latte/latte",
+            "version": "v3.0.24",
+            "description": "Latte: the safest and truly intuitive templates for PHP"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": true,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=8.1"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "2.6.0"
+}
