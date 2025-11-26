@@ -1,7 +1,9 @@
-﻿<?php
+<?php
 namespace App\Classes;
 
 use Monolog\Logger;
+use App\Classes\Database;
+use Exception;
 
 class LoginController
 {
@@ -24,7 +26,6 @@ class LoginController
             "old_input" => $_SESSION["old_input"] ?? []
         ];
 
-        // Clear session data
         unset($_SESSION["login_errors"], $_SESSION["old_input"]);
 
         $this->viewer->render("login", $data);
@@ -57,15 +58,23 @@ class LoginController
             return;
         }
 
-        // Simple authentication (in real app, check against database)
-        if ($email === "admin@example.com" && $password === "password") {
-            $_SESSION["user"] = ["email" => $email, "name" => "Admin"];
-            $this->logger->info("User logged in successfully", ["email" => $email]);
-            $this->viewer->redirect("/home");
-        } else {
-            $_SESSION["login_errors"] = ["РќРµРІС–СЂРЅРёР№ email Р°Р±Рѕ РїР°СЂРѕР»СЊ"];
+        try {
+            $user = Database::authenticateUser($email, $password);
+
+            if ($user) {
+                $_SESSION["user"] = $user;
+                $this->logger->info("User logged in successfully", ["email" => $email, "user_id" => $user["id"]]);
+                $this->viewer->redirect("/home");
+            } else {
+                $_SESSION["login_errors"] = ["РќРµРІС–СЂРЅРёР№ email Р°Р±Рѕ РїР°СЂРѕР»СЊ"];
+                $_SESSION["old_input"] = ["email" => $email];
+                $this->logger->warning("Failed login attempt", ["email" => $email]);
+                $this->viewer->redirect("/login");
+            }
+        } catch (Exception $e) {
+            $this->logger->error("Database error during login", ["error" => $e->getMessage()]);
+            $_SESSION["login_errors"] = ["Помилка сервера. Спробуйте пізніше."];
             $_SESSION["old_input"] = ["email" => $email];
-            $this->logger->warning("Failed login attempt", ["email" => $email]);
             $this->viewer->redirect("/login");
         }
     }
