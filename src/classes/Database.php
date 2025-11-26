@@ -9,7 +9,7 @@ class Database
 {
     private static ?PDO $connection = null;
 
-     *
+    /**
      * @return PDO
      * @throws Exception
      */
@@ -44,13 +44,13 @@ class Database
                     ]
                 );
             } else {
-                throw new Exception("Непідтримуваний тип бази даних: {$dbType}");
+                throw new Exception("Unsupported database type: {$dbType}");
             }
 
             return self::$connection;
 
         } catch (PDOException $e) {
-            throw new Exception("Помилка підключення до бази даних: " . $e->getMessage());
+            throw new Exception("Database connection error: " . $e->getMessage());
         }
     }
 
@@ -70,11 +70,12 @@ class Database
         $stmt->execute();
     }
 
-     *
+    /**
      * @param string $email
      * @param string $password
-     * @return array|null Масив з даними користувача або null, якщо не знайдено
+     * @return array|null
      * @throws Exception
+     */
     public static function authenticateUser(string $email, string $password): ?array
     {
         try {
@@ -94,16 +95,17 @@ class Database
             return null;
 
         } catch (PDOException $e) {
-            throw new Exception("Помилка авторизації: " . $e->getMessage());
+            throw new Exception("Authentication error: " . $e->getMessage());
         }
     }
 
-     *
+    /**
      * @param string $email
      * @param string $password
      * @param string $name
-     * @return int ID створеного користувача
+     * @return int
      * @throws Exception
+     */
     public static function registerUser(string $email, string $password, string $name): int
     {
         try {
@@ -114,7 +116,7 @@ class Database
             $checkStmt->execute([$email]);
 
             if ($checkStmt->fetch()) {
-                throw new Exception("Користувач з таким email вже існує");
+                throw new Exception("User with this email already exists");
             }
 
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -126,7 +128,7 @@ class Database
             return (int) $pdo->lastInsertId();
 
         } catch (PDOException $e) {
-            throw new Exception("Помилка реєстрації: " . $e->getMessage());
+            throw new Exception("Registration error: " . $e->getMessage());
         }
     }
 
