@@ -3,6 +3,7 @@ namespace App\Classes;
 
 use Monolog\Logger;
 use App\Classes\Database;
+use App\Classes\Security;
 use Exception;
 
 class RegisterController
@@ -35,31 +36,31 @@ class RegisterController
     {
         $this->logger->info("Registration attempt", ["email" => $_POST["email"] ?? ""]);
 
-        $email = trim($_POST["email"] ?? "");
-        $password = $_POST["password"] ?? "";
-        $confirmPassword = $_POST["confirm_password"] ?? "";
-        $name = trim($_POST["name"] ?? "");
+        $email = Security::sanitizeEmail($_POST["email"] ?? "");
+        $password = Security::sanitizePassword($_POST["password"] ?? "");
+        $confirmPassword = Security::sanitizePassword($_POST["confirm_password"] ?? "");
+        $name = Security::sanitizeInput($_POST["name"] ?? "");
 
         $errors = [];
 
         if (empty($email)) {
-            $errors[] = "Email обов'язковий";
+            $errors[] = Security::escapeOutput("Email обов'язковий");
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "Невірний формат email";
+            $errors[] = Security::escapeOutput("Невірний формат email");
         }
 
         if (empty($password)) {
-            $errors[] = "Пароль обов'язковий";
+            $errors[] = Security::escapeOutput("Пароль обов'язковий");
         } elseif (strlen($password) < 6) {
-            $errors[] = "Пароль має бути не менше 6 символів";
+            $errors[] = Security::escapeOutput("Пароль має бути не менше 6 символів");
         }
 
         if ($password !== $confirmPassword) {
-            $errors[] = "Паролі не співпадають";
+            $errors[] = Security::escapeOutput("Паролі не співпадають");
         }
 
         if (empty($name)) {
-            $errors[] = "Ім'я обов'язкове";
+            $errors[] = Security::escapeOutput("Ім'я обов'язкове");
         }
 
         if (!empty($errors)) {
@@ -89,9 +90,9 @@ class RegisterController
         } catch (Exception $e) {
             $this->logger->error("Registration error", ["error" => $e->getMessage()]);
 
-            $errorMessage = "Помилка реєстрації";
-            if (strpos($e->getMessage(), "вже існує") !== false) {
-                $errorMessage = "Користувач з таким email вже існує";
+            $errorMessage = Security::escapeOutput("Помилка реєстрації");
+            if (strpos($e->getMessage(), "already exists") !== false) {
+                $errorMessage = Security::escapeOutput("Користувач з таким email вже існує");
             }
 
             $_SESSION["register_errors"] = [$errorMessage];
