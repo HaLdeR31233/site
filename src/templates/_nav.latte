@@ -1,0 +1,19 @@
+﻿<nav class="navbar">
+    <div class="nav-container">
+        <div class="logo">
+            <a href="{$baseUrl}/">DIM.RIA</a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="{$baseUrl}/">Р“РѕР»РѕРІРЅР°</a></li>
+            <li><a href="{$baseUrl}/properties">РќРµСЂСѓС…РѕРјС–СЃС‚СЊ</a></li>
+            <li><a href="{$baseUrl}/agents">РђРіРµРЅС‚Рё</a></li>
+            <li><a href="{$baseUrl}/about">РџСЂРѕ РЅР°СЃ</a></li>
+            {if isset($_SESSION['\''user'\''])}
+                <li><a href="{$baseUrl}/profile">РџСЂРѕС„С–Р»СЊ</a></li>
+                <li><a href="{$baseUrl}/auth?action=logout">Р’РёР№С‚Рё</a></li>
+            {else}
+                <li><a href="{$baseUrl}/login" class="login-link">РЈРІС–Р№С‚Рё</a></li>
+            {/if}
+        </ul>
+    </div>
+</nav>
