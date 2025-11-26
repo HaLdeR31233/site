@@ -8,6 +8,7 @@ use App\Classes\LoginController;
 use App\Classes\AuthController;
 use App\Classes\ErrorController;
 use App\Classes\RegisterController;
+use App\Classes\PropertyController;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\VarDumper\VarDumper;
@@ -59,6 +60,52 @@ try {
         case 'auth':
             $controller = new AuthController($viewer, $logger);
             $controller->handleAuth();
+            break;
+
+        case 'properties':
+            $controller = new PropertyController($viewer, $logger);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $controller->store();
+            } else {
+                $controller->index();
+            }
+            break;
+
+        case (preg_match('/^properties\/(\d+)$/', $path, $matches) ? true : false):
+            $controller = new PropertyController($viewer, $logger);
+            $propertyId = (int) $matches[1];
+            $controller->show($propertyId);
+            break;
+
+        case (preg_match('/^properties\/(\d+)\/edit$/', $path, $matches) ? true : false):
+            $controller = new PropertyController($viewer, $logger);
+            $propertyId = (int) $matches[1];
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $controller->update($propertyId);
+            } else {
+                $controller->edit($propertyId);
+            }
+            break;
+
+        case (preg_match('/^properties\/(\d+)\/delete$/', $path, $matches) ? true : false):
+            $controller = new PropertyController($viewer, $logger);
+            $propertyId = (int) $matches[1];
+            $controller->delete($propertyId);
+            break;
+
+        case 'properties/create':
+            $controller = new PropertyController($viewer, $logger);
+            $controller->create();
+            break;
+
+        case 'properties/my':
+            $controller = new PropertyController($viewer, $logger);
+            $controller->myProperties();
+            break;
+
+        case 'properties/search':
+            $controller = new PropertyController($viewer, $logger);
+            $controller->search();
             break;
 
         default:
