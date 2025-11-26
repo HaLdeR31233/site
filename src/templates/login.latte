@@ -1,9 +1,9 @@
-{layout @layout.latte}
+﻿{layout @layout.latte}
 
 {block content}
 <div class="auth-container">
     <div class="auth-forms">
-        <h2>Р’С…С–Рґ РґРѕ СЃРёСЃС‚РµРјРё</h2>
+        <h2>Вхід до системи</h2>
 
         {if isset($errors) && count($errors) > 0}
         <div class="error-messages">
@@ -17,27 +17,27 @@
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email"
-                       value="{$old_input['\''email'\''] ?? '\'\'}" required>
+                       value="{$old_input['email'] ?? ''}" required>
             </div>
 
             <div class="form-group">
-                <label for="password">РџР°СЂРѕР»СЊ:</label>
+                <label for="password">Пароль:</label>
                 <input type="password" id="password" name="password" required>
             </div>
 
             <div class="form-group">
                 <label class="checkbox-label">
                     <input type="checkbox" name="remember">
-                    Р—Р°РїР°Рј'СЏС‚Р°С‚Рё РјРµРЅРµ
+                    Запам'ятати мене
                 </label>
             </div>
 
-            <button type="submit" class="auth-button">РЈРІС–Р№С‚Рё</button>
+            <button type="submit" class="auth-button">Увійти</button>
         </form>
 
         <div class="auth-links">
-            <p><a href="{$baseUrl}/register">РќРµРјР°С” Р°РєР°СѓРЅС‚Сѓ? Р—Р°СЂРµС”СЃС‚СЂСѓРІР°С‚РёСЃСЏ</a></p>
-            <p><a href="{$baseUrl}/forgot-password">Р—Р°Р±СѓР»Рё РїР°СЂРѕР»СЊ?</a></p>
+            <p><a href="{$baseUrl}/register">Немає акаунту? Зареєструватися</a></p>
+            <p><a href="{$baseUrl}/forgot-password">Забули пароль?</a></p>
         </div>
     </div>
 </div>
