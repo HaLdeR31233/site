@@ -1,1 +1,44 @@
+{layout @layout.latte}
 
+{block content}
+<div class="auth-container">
+    <div class="auth-forms">
+        <h2>Р’С…С–Рґ РґРѕ СЃРёСЃС‚РµРјРё</h2>
+
+        {if isset($errors) && count($errors) > 0}
+        <div class="error-messages">
+            {foreach $errors as $error}
+            <p class="error">{$error}</p>
+            {/foreach}
+        </div>
+        {/if}
+
+        <form method="POST" action="{$baseUrl}/login" class="auth-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"
+                       value="{$old_input['\''email'\''] ?? '\'\'}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">РџР°СЂРѕР»СЊ:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="remember">
+                    Р—Р°РїР°Рј'СЏС‚Р°С‚Рё РјРµРЅРµ
+                </label>
+            </div>
+
+            <button type="submit" class="auth-button">РЈРІС–Р№С‚Рё</button>
+        </form>
+
+        <div class="auth-links">
+            <p><a href="{$baseUrl}/register">РќРµРјР°С” Р°РєР°СѓРЅС‚Сѓ? Р—Р°СЂРµС”СЃС‚СЂСѓРІР°С‚РёСЃСЏ</a></p>
+            <p><a href="{$baseUrl}/forgot-password">Р—Р°Р±СѓР»Рё РїР°СЂРѕР»СЊ?</a></p>
+        </div>
+    </div>
+</div>
+{/block}
