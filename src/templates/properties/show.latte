@@ -1,0 +1,197 @@
+{layout @layout.latte}
+
+{block content}
+<div class="property-detail">
+    <div class="property-header">
+        <h1>{$property->getTitle()|escape}</h1>
+        <div class="property-actions">
+            {if isset($_SESSION['user']) && $_SESSION['user']['id'] === $property->getUserId()}
+                <a href="{$baseUrl}/properties/{$property->getId()}/edit" class="btn btn-primary">Редагувати</a>
+                <form method="POST" action="{$baseUrl}/properties/{$property->getId()}/delete" style="display: inline;" onsubmit="return confirm('Ви впевнені, що хочете видалити цю нерухомість?')">
+                    <button type="submit" class="btn btn-danger">Видалити</button>
+                </form>
+            {/if}
+            <a href="{$baseUrl}/properties" class="btn btn-secondary">Назад до списку</a>
+        </div>
+    </div>
+
+    <div class="property-content">
+        <div class="property-main-info">
+            <div class="property-price">
+                <span class="price-amount">{$property->getFormattedPrice()}</span>
+                <span class="property-status status-{$property->getStatus()}">{$property->getStatusInUkrainian()}</span>
+            </div>
+
+            <div class="property-details">
+                <div class="detail-item">
+                    <span class="detail-label">Тип:</span>
+                    <span class="detail-value">{$property->getTypeInUkrainian()}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Кімнат:</span>
+                    <span class="detail-value">{$property->getRooms()}</span>
+                </div>
+                {if $property->getArea() > 0}
+                <div class="detail-item">
+                    <span class="detail-label">Площа:</span>
+                    <span class="detail-value">{$property->getArea()} м²</span>
+                </div>
+                {/if}
+                <div class="detail-item">
+                    <span class="detail-label">Адреса:</span>
+                    <span class="detail-value">{$property->getAddress()|escape}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Дата створення:</span>
+                    <span class="detail-value">{date('d.m.Y H:i', strtotime($property->getCreatedAt()))}</span>
+                </div>
+            </div>
+        </div>
+
+        {if $property->getDescription()}
+        <div class="property-description">
+            <h3>Опис</h3>
+            <p>{$property->getDescription()|escape|nl2br}</p>
+        </div>
+        {/if}
+    </div>
+</div>
+
+<style>
+.property-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.property-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.property-header h1 {
+    margin: 0;
+    flex: 1;
+}
+
+.property-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.property-content {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 30px;
+}
+
+.property-price {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.price-amount {
+    font-size: 2em;
+    font-weight: bold;
+    color: #2c5aa0;
+}
+
+.property-status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.status-available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-rented {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.status-sold {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.property-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.detail-label {
+    font-weight: bold;
+    color: #666;
+}
+
+.detail-value {
+    color: #333;
+}
+
+.property-description {
+    margin-top: 30px;
+}
+
+.property-description h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.property-description p {
+    line-height: 1.6;
+    color: #555;
+}
+
+.btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9em;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+</style>
+{/block}
