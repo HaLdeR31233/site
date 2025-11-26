@@ -3,6 +3,7 @@ namespace App\Classes;
 
 use Monolog\Logger;
 use App\Classes\Database;
+use App\Classes\Security;
 use Exception;
 
 class LoginController
@@ -35,20 +36,20 @@ class LoginController
     {
         $this->logger->info("Login attempt", ["email" => $_POST["email"] ?? ""]);
 
-        $email = trim($_POST["email"] ?? "");
-        $password = $_POST["password"] ?? "";
+        $email = Security::sanitizeEmail($_POST["email"] ?? "");
+        $password = Security::sanitizePassword($_POST["password"] ?? "");
         $remember = isset($_POST["remember"]);
 
         $errors = [];
 
         if (empty($email)) {
-            $errors[] = "Email РѕР±РѕРІ'СЏР·РєРѕРІРёР№";
+            $errors[] = Security::escapeOutput("Email обов'язковий");
         } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = "РќРµРІС–СЂРЅРёР№ С„РѕСЂРјР°С‚ email";
+            $errors[] = Security::escapeOutput("Невірний формат email");
         }
 
         if (empty($password)) {
-            $errors[] = "РџР°СЂРѕР»СЊ РѕР±РѕРІ'СЏР·РєРѕРІРёР№";
+            $errors[] = Security::escapeOutput("Пароль обов'язковий");
         }
 
         if (!empty($errors)) {
@@ -66,14 +67,14 @@ class LoginController
                 $this->logger->info("User logged in successfully", ["email" => $email, "user_id" => $user["id"]]);
                 $this->viewer->redirect("/home");
             } else {
-                $_SESSION["login_errors"] = ["РќРµРІС–СЂРЅРёР№ email Р°Р±Рѕ РїР°СЂРѕР»СЊ"];
+                $_SESSION["login_errors"] = [Security::escapeOutput("Невірний email або пароль")];
                 $_SESSION["old_input"] = ["email" => $email];
                 $this->logger->warning("Failed login attempt", ["email" => $email]);
                 $this->viewer->redirect("/login");
             }
         } catch (Exception $e) {
             $this->logger->error("Database error during login", ["error" => $e->getMessage()]);
-            $_SESSION["login_errors"] = ["Помилка сервера. Спробуйте пізніше."];
+            $_SESSION["login_errors"] = [Security::escapeOutput("Помилка сервера. Спробуйте пізніше.")];
             $_SESSION["old_input"] = ["email" => $email];
             $this->viewer->redirect("/login");
         }
