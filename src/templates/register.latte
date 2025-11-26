@@ -8,7 +8,7 @@
         {if isset($errors) && count($errors) > 0}
         <div class="error-messages">
             {foreach $errors as $error}
-            <p class="error">{$error}</p>
+            <p class="error">{$error|escape}</p>
             {/foreach}
         </div>
         {/if}
@@ -17,13 +17,13 @@
             <div class="form-group">
                 <label for="name">Ім'я:</label>
                 <input type="text" id="name" name="name"
-                       value="{$old_input['name'] ?? ''}" required>
+                       value="{$old_input['name'] ?? ''|escape}" required>
             </div>
 
             <div class="form-group">
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email"
-                       value="{$old_input['email'] ?? ''}" required>
+                       value="{$old_input['email'] ?? ''|escape}" required>
             </div>
 
             <div class="form-group">
