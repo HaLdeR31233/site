@@ -1,0 +1,15 @@
+﻿{layout @layout.latte}
+
+{block content}
+<div class="error-page">
+    <div class="error-content">
+        <h1>500</h1>
+        <h2>Внутрішня помилка сервера</h2>
+        <p>Вибачте, сталася технічна помилка. Наші спеціалісти вже працюють над її усуненням.</p>
+        <div class="error-actions">
+            <a href="{$baseUrl}/" class="btn-primary">На головну</a>
+            <a href="mailto:support@dim.ria.ua" class="btn-secondary">Повідомити про помилку</a>
+        </div>
+    </div>
+</div>
+{/block}

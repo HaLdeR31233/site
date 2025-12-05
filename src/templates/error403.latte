@@ -1,0 +1,15 @@
+﻿{layout @layout.latte}
+
+{block content}
+<div class="error-page">
+    <div class="error-content">
+        <h1>403</h1>
+        <h2>Доступ заборонено</h2>
+        <p>У вас немає прав для перегляду цієї сторінки.</p>
+        <div class="error-actions">
+            <a href="{$baseUrl}/" class="btn-primary">На головну</a>
+            <a href="{$baseUrl}/login" class="btn-secondary">Увійти</a>
+        </div>
+    </div>
+</div>
+{/block}

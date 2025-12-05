@@ -1,0 +1,227 @@
+{layout @layout.latte}
+
+{block content}
+<div class="properties-container">
+    <div class="properties-header">
+        <h1>Нерухомість</h1>
+        <div class="properties-actions">
+            {if isset($_SESSION['user'])}
+                <a href="{$baseUrl}/properties/create" class="btn btn-primary">Додати оголошення</a>
+                <a href="{$baseUrl}/properties/my" class="btn btn-secondary">Мої оголошення</a>
+            {/if}
+        </div>
+    </div>
+
+    <!-- Search and Filters -->
+    <div class="properties-filters">
+        <form method="GET" action="{$baseUrl}/properties/search" class="search-form">
+            <div class="search-input">
+                <input type="text" name="q" placeholder="Пошук нерухомості..." value="{$filters['query'] ?? ''|escape}">
+                <button type="submit" class="btn btn-search">Пошук</button>
+            </div>
+        </form>
+
+        <form method="GET" action="{$baseUrl}/properties" class="filters-form">
+            <div class="filter-group">
+                <select name="type">
+                    <option value="">Всі типи</option>
+                    <option value="apartment" {if $filters['type'] === 'apartment'}selected{/if}>Квартира</option>
+                    <option value="house" {if $filters['type'] === 'house'}selected{/if}>Будинок</option>
+                    <option value="office" {if $filters['type'] === 'office'}selected{/if}>Офіс</option>
+                    <option value="commercial" {if $filters['type'] === 'commercial'}selected{/if}>Комерційна</option>
+                </select>
+
+                <select name="status">
+                    <option value="">Всі статуси</option>
+                    <option value="available" {if $filters['status'] === 'available'}selected{/if}>Доступно</option>
+                    <option value="rented" {if $filters['status'] === 'rented'}selected{/if}>Орендовано</option>
+                </select>
+
+                <input type="number" name="min_price" placeholder="Мін. ціна" value="{$filters['min_price'] ?? ''|escape}">
+                <input type="number" name="max_price" placeholder="Макс. ціна" value="{$filters['max_price'] ?? ''|escape}">
+
+                <button type="submit" class="btn btn-filter">Фільтрувати</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Properties List -->
+    <div class="properties-list">
+        {if count($properties) > 0}
+            {foreach $properties as $property}
+            <div class="property-card">
+                <div class="property-info">
+                    <h3><a href="{$baseUrl}/properties/{$property->getId()}">{$property->getTitle()|escape}</a></h3>
+                    <p class="property-address">{$property->getAddress()|escape}</p>
+                    <div class="property-details">
+                        <span class="property-price">{$property->getFormattedPrice()}</span>
+                        <span class="property-type">{$property->getTypeInUkrainian()}</span>
+                        <span class="property-rooms">{$property->getRooms()} кімнат</span>
+                        {if $property->getArea() > 0}
+                            <span class="property-area">{$property->getArea()} м²</span>
+                        {/if}
+                    </div>
+                    <div class="property-status status-{$property->getStatus()}">
+                        {$property->getStatusInUkrainian()}
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+        {else}
+            <div class="no-properties">
+                <p>Нерухомість не знайдена</p>
+            </div>
+        {/if}
+    </div>
+</div>
+
+<style>
+.properties-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.properties-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.properties-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.properties-filters {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+}
+
+.search-form, .filters-form {
+    margin-bottom: 15px;
+}
+
+.search-input {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.filter-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-group select, .filter-group input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.properties-list {
+    display: grid;
+    gap: 20px;
+}
+
+.property-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    transition: box-shadow 0.3s;
+}
+
+.property-card:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.property-info h3 {
+    margin: 0 0 10px 0;
+}
+
+.property-info h3 a {
+    color: #333;
+    text-decoration: none;
+}
+
+.property-address {
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.property-details {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+}
+
+.property-price {
+    font-weight: bold;
+    color: #2c5aa0;
+    font-size: 1.2em;
+}
+
+.property-status {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.status-available {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-rented {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: #007bff;
+    color: white;
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-search, .btn-filter {
+    background: #28a745;
+    color: white;
+}
+
+.no-properties {
+    text-align: center;
+    padding: 40px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+</style>
+{/block}

@@ -1,0 +1,44 @@
+{layout @layout.latte}
+
+{block content}
+<div class="auth-container">
+    <div class="auth-forms">
+        <h2>Вхід до системи</h2>
+
+        {if isset($errors) && count($errors) > 0}
+        <div class="error-messages">
+            {foreach $errors as $error}
+            <p class="error">{$error|escape}</p>
+            {/foreach}
+        </div>
+        {/if}
+
+        <form method="POST" action="{$baseUrl}/login" class="auth-form">
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email"
+                       value="{$old_input['email'] ?? ''|escape}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" name="remember">
+                    Запам'ятати мене
+                </label>
+            </div>
+
+            <button type="submit" class="auth-button">Увійти</button>
+        </form>
+
+        <div class="auth-links">
+            <p><a href="{$baseUrl}/register">Немає акаунту? Зареєструватися</a></p>
+            <p><a href="{$baseUrl}/forgot-password">Забули пароль?</a></p>
+        </div>
+    </div>
+</div>
+{/block}

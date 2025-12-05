@@ -1,0 +1,15 @@
+﻿{layout @layout.latte}
+
+{block content}
+<div class="error-page">
+    <div class="error-content">
+        <h1>404</h1>
+        <h2>Сторінку не знайдено</h2>
+        <p>На жаль, сторінка, яку ви шукаєте, не існує або була переміщена.</p>
+        <div class="error-actions">
+            <a href="{$baseUrl}/" class="btn-primary">На головну</a>
+            <button onclick="history.back()" class="btn-secondary">Назад</button>
+        </div>
+    </div>
+</div>
+{/block}

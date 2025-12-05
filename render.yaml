@@ -1,0 +1,39 @@
+﻿services:
+  - type: web
+    name: dim-ria-composer
+    env: php
+    buildCommand: "composer install --no-dev --optimize-autoloader"
+    startCommand: "php -S 0.0.0.0:`$PORT -t public"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: LOG_LEVEL
+        value: info
+
+  - type: pserv
+    name: dim-ria-worker
+    env: php
+    buildCommand: "composer install --no-dev --optimize-autoloader"
+    startCommand: "php worker.php"
+    envVars:
+      - key: APP_ENV
+        value: production
+
+databases:
+  - name: dim-ria-db
+    databaseName: dimria
+    user: dimria_user
+    plan: starter
+
+envVarGroups:
+  - name: dim-ria-env
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: dim-ria-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: dim-ria-redis
+          property: connectionString
