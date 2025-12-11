@@ -12,6 +12,7 @@ use App\Classes\PropertyController;
 use App\Classes\AboutMeController;
 use App\Classes\MyModel;
 use App\Classes\PropertyApiController;
+use App\Classes\Security;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\VarDumper\VarDumper;
@@ -41,6 +42,10 @@ if (getenv('APP_DEBUG') === 'true') {
         ]
     ]);
 }
+
+// Фільтруємо вхідні дані для захисту від XSS
+Security::sanitizePostData();
+Security::sanitizeGetData();
 
 $request = $_SERVER['REQUEST_URI'];
 $path = parse_url($request, PHP_URL_PATH);
