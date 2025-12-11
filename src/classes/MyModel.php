@@ -17,6 +17,7 @@ namespace App\Classes;
 
 use App\Classes\Database;
 use App\Classes\Property;
+use App\Classes\Security;
 use PDO;
 use Exception;
 use Monolog\Logger;
@@ -58,6 +59,8 @@ class MyModel
      */
     public function createProperty(array $data): Property
     {
+        // Санітізуємо вхідні дані
+        $data = Security::sanitizeArray($data);
         $this->validatePropertyData($data);
 
         $property = new Property(
@@ -100,6 +103,8 @@ class MyModel
             throw new Exception("Property not found with ID: {$id}");
         }
 
+        // Санітізуємо вхідні дані
+        $data = Security::sanitizeArray($data);
         $this->validatePropertyData($data, false); // false = не обов'язкові поля
 
         if (isset($data['title'])) $property->setTitle($data['title']);
@@ -196,6 +201,10 @@ class MyModel
      */
     public function searchProperties(string $query, array $filters = []): array
     {
+        // Санітізуємо пошуковий запит та фільтри
+        $query = Security::sanitizeInput($query);
+        $filters = Security::sanitizeArray($filters);
+
         $results = Property::search($query, $filters);
 
         $this->logger->info("Properties search performed", [
@@ -391,42 +400,42 @@ class MyModel
 
         if ($requireAll || isset($data['title'])) {
             if (empty($data['title']) || strlen($data['title']) < 3) {
-                $errors[] = "Title must be at least 3 characters long";
+                $errors[] = "Назва має бути не менше 3 символів";
             }
         }
 
         if ($requireAll || isset($data['address'])) {
             if (empty($data['address'])) {
-                $errors[] = "Address is required";
+                $errors[] = "Адреса обов'язкова";
             }
         }
 
         if ($requireAll || isset($data['price'])) {
             if (!is_numeric($data['price']) || $data['price'] <= 0) {
-                $errors[] = "Price must be a positive number";
+                $errors[] = "Ціна має бути додатним числом";
             }
         }
 
         if (isset($data['rooms']) && (!is_numeric($data['rooms']) || $data['rooms'] < 0)) {
-            $errors[] = "Rooms must be a non-negative number";
+            $errors[] = "Кількість кімнат має бути невід'ємним числом";
         }
 
         if (isset($data['area']) && (!is_numeric($data['area']) || $data['area'] < 0)) {
-            $errors[] = "Area must be a non-negative number";
+            $errors[] = "Площа має бути невід'ємним числом";
         }
 
         $validTypes = ['apartment', 'house', 'office', 'land', 'commercial'];
         if (isset($data['type']) && !in_array($data['type'], $validTypes)) {
-            $errors[] = "Invalid property type";
+            $errors[] = "Невірний тип нерухомості";
         }
 
         $validStatuses = ['available', 'rented', 'sold'];
         if (isset($data['status']) && !in_array($data['status'], $validStatuses)) {
-            $errors[] = "Invalid property status";
+            $errors[] = "Невірний статус нерухомості";
         }
 
         if (!empty($errors)) {
-            throw new Exception("Validation errors: " . implode(", ", $errors));
+            throw new Exception("Помилки валідації: " . implode(", ", $errors));
         }
     }
 
