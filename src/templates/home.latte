@@ -1,45 +1,7 @@
-﻿{layout @layout.latte}
+{extends @layout.latte}
 
 {block content}
-<div class="hero-section">
-    <div class="hero-content">
-        <h1>Перевірена нерухомість на мапі України</h1>
-        <p class="hero-description">
-            Знайдіть ідеальну квартиру або будинок серед 15,000+ об'єктів.
-            Всі оголошення перевірені, з фото та актуальними цінами.
-        </p>
-        <div class="hero-stats">
-            <div class="stat">
-                <span class="stat-number">{$stats['objects']}</span>
-                <span class="stat-label">об'єктів</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">{$stats['cities']}</span>
-                <span class="stat-label">міст</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">{$stats['users']}</span>
-                <span class="stat-label">користувачів</span>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="features-section">
-    <div class="container">
-        <h2>Чому обирають DIM.RIA?</h2>
-        <div class="features-grid">
-            {foreach $features as $feature}
-            <div class="feature-card">
-                <div class="feature-icon">✓</div>
-                <h3>{$feature}</h3>
-            </div>
-            {/foreach}
-        </div>
-    </div>
-</div>
-
-<div class="current-time">
-    <p>Поточний час: {$currentTime}</p>
-</div>
+<h1>{$title}</h1>
+<p>{$message}</p>
+<p>Поточний час: {$currentTime}</p>
 {/block}
