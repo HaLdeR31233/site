@@ -223,35 +223,84 @@ console.log('font-size <h1>:', h1FontSize);
     });
 })();
 
-// Lodash - обробка даних для порівняння фраз
-(function enhanceCompareWithLodash() {
+// Завдання 4: Використання Set для порівняння фраз
+(function comparePhrasesWithSet() {
     window.addEventListener('load', () => {
         const input = document.getElementById('phrase-input');
         const button = document.getElementById('compare-btn');
         const resultBox = document.getElementById('compare-result');
         if (!input || !button || !resultBox) return;
 
-        let previousPhraseWords = null;
+        let previousPhraseSet = null;
+
+        /**
+         * Нормалізує текст: видаляє знаки препинания, приводить до нижнього регістру
+         * @param {string} text - Вхідний текст
+         * @returns {string[]} Масив слів
+         */
+        function normalizeText(text) {
+            return text
+                .toLowerCase()
+                .replace(/[.,!?;:()\[\]{}"'`«»]/g, ' ')
+                .split(/\s+/)
+                .filter(word => word.length > 0);
+        }
+
+        /**
+         * Створює Set з масиву слів
+         * @param {string[]} words - Масив слів
+         * @returns {Set} Set слів
+         */
+        function createWordsSet(words) {
+            return new Set(words);
+        }
+
+        /**
+         * Знаходить перетин двох Set (спільні слова)
+         * @param {Set} set1 - Перший Set
+         * @param {Set} set2 - Другий Set
+         * @returns {string[]} Масив спільних слів
+         */
+        function findIntersection(set1, set2) {
+            const commonWords = [];
+            for (const word of set1) {
+                if (set2.has(word)) {
+                    commonWords.push(word);
+                }
+            }
+            return commonWords;
+        }
 
         button.addEventListener('click', () => {
-            const words = _.words(_.toLower(input.value));
+            const inputValue = input.value.trim();
             
-            if (previousPhraseWords) {
-                const common = _.intersection(previousPhraseWords, words);
-                const unique = _.difference(words, previousPhraseWords);
+            if (!inputValue) {
+                resultBox.textContent = 'Будь ласка, введіть фразу!';
+                return;
+            }
+
+            // Нормалізуємо текст та створюємо Set
+            const words = normalizeText(inputValue);
+            const currentPhraseSet = createWordsSet(words);
+
+            if (previousPhraseSet) {
+                // Знаходимо спільні слова (перетин Set)
+                const commonWords = findIntersection(previousPhraseSet, currentPhraseSet);
                 
-                if (common.length) {
-                    resultBox.textContent = `Спільні слова: ${common.join(', ')}`;
-                } else if (unique.length) {
-                    resultBox.textContent = `Нові слова: ${unique.join(', ')}`;
+                if (commonWords.length > 0) {
+                    resultBox.textContent = `Спільні слова: ${commonWords.join(', ')}`;
+                    resultBox.style.color = '#28a745';
                 } else {
                     resultBox.textContent = 'Спільних слів немає';
+                    resultBox.style.color = '#dc3545';
                 }
             } else {
                 resultBox.textContent = 'Збережено першу фразу. Введіть наступну для порівняння.';
+                resultBox.style.color = '#007bff';
             }
             
-            previousPhraseWords = words;
+            // Зберігаємо поточний Set як попередній
+            previousPhraseSet = currentPhraseSet;
             input.value = '';
             input.focus();
         });
