@@ -1,4 +1,4 @@
-﻿{
+{
     "name": "halder31233/composer",
     "description": "DIM.RIA - PHP project with Composer for verified real estate on map",
     "type": "project",
@@ -18,7 +18,10 @@
     "autoload": {
         "psr-4": {
             "App\\": "src/"
-        }
+        },
+        "classmap": [
+            "src/classes/"
+        ]
     },
     "config": {
         "optimize-autoloader": true,
