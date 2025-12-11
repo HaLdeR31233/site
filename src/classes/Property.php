@@ -14,8 +14,8 @@ class Property
     private float $price;
     private int $rooms;
     private float $area;
-    private string $type; // apartment, house, office, etc.
-    private string $status; // available, rented, sold
+    private string $type;
+    private string $status; 
     private ?int $user_id;
     private string $created_at;
     private string $updated_at;
@@ -62,7 +62,6 @@ class Property
     public function getCreatedAt(): string { return $this->created_at; }
     public function getUpdatedAt(): string { return $this->updated_at; }
 
-    // Setters
     public function setTitle(string $title): void { $this->title = $title; }
     public function setDescription(string $description): void { $this->description = $description; }
     public function setAddress(string $address): void { $this->address = $address; }
@@ -73,7 +72,6 @@ class Property
     public function setStatus(string $status): void { $this->status = $status; }
     public function setUserId(?int $user_id): void { $this->user_id = $user_id; }
 
-    // Static methods for database operations
     public static function createTable(): void
     {
         $pdo = Database::connect();
@@ -276,7 +274,6 @@ class Property
             $pdo = Database::connect();
 
             if ($this->id) {
-                // Update existing property
                 $sql = "UPDATE properties SET title = ?, description = ?, address = ?, price = ?, rooms = ?, area = ?, type = ?, status = ?, user_id = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?";
                 $stmt = $pdo->prepare($sql);
                 return $stmt->execute([
@@ -292,7 +289,6 @@ class Property
                     $this->id
                 ]);
             } else {
-                // Create new property
                 $sql = "INSERT INTO properties (title, description, address, price, rooms, area, type, status, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute([
@@ -343,8 +339,7 @@ class Property
         return $this->save();
     }
 
-    // Helper method to create Property object from array
-    private static function createFromArray(array $data): Property
+    public static function createFromArray(array $data): Property
     {
         return new Property(
             $data['id'] ?? null,
@@ -362,7 +357,6 @@ class Property
         );
     }
 
-    // Convert to array (for JSON responses, etc.)
     public function toArray(): array
     {
         return [
@@ -381,13 +375,11 @@ class Property
         ];
     }
 
-    // Get formatted price
     public function getFormattedPrice(): string
     {
         return number_format($this->price, 0, '.', ' ') . ' ₴';
     }
 
-    // Get property type in Ukrainian
     public function getTypeInUkrainian(): string
     {
         $types = [
@@ -401,7 +393,6 @@ class Property
         return $types[$this->type] ?? $this->type;
     }
 
-    // Get status in Ukrainian
     public function getStatusInUkrainian(): string
     {
         $statuses = [
