@@ -69,66 +69,22 @@ console.log('font-size <h1>:', h1FontSize);
     });
 })();
 
-(function comparePhrasesWithSet() {
-    let previousPhraseSet = null;
-
-    function normalize(text) {
-        return text
-            .toLowerCase()
-            .replace(/[.,!?;:()\[\]{}"'`«»]/g, ' ')
-            .split(/\s+/)
-            .filter(Boolean);
-    }
-
-    function toSet(words) {
-        return new Set(words);
-    }
-
-    function intersectSets(a, b) {
-        const result = [];
-        for (const item of a) {
-            if (b.has(item)) result.push(item);
-        }
-        return result;
-    }
-
-    window.addEventListener('load', () => {
-        const input = document.getElementById('phrase-input');
-        const button = document.getElementById('compare-btn');
-        const resultBox = document.getElementById('compare-result');
-        if (!input || !button || !resultBox) return;
-
-        button.addEventListener('click', () => {
-            const words = normalize(input.value);
-            const currentSet = toSet(words);
-
-            if (previousPhraseSet) {
-                const common = intersectSets(previousPhraseSet, currentSet);
-                resultBox.textContent = common.length ? `Спільні слова: ${common.join(', ')}` : 'Спільних слів немає';
-            } else {
-                resultBox.textContent = 'Збережено першу фразу. Введіть наступну для порівняння.';
-            }
-            previousPhraseSet = currentSet;
-            input.value = '';
-            input.focus();
-        });
-    });
-})();
-
-(function dogApiDemo() {
-    async function fetchRandomDog() {
+// Axios - заміна fetch для завантаження зображень
+(function loadImageWithAxios() {
+    async function fetchRandomImage() {
         const resultBox = document.getElementById('dog-result');
         if (!resultBox) return;
         resultBox.textContent = 'Завантаження...';
         
         try {
-            // Используем Lorem Picsum для случайных изображений
-            const resp = await fetch('https://picsum.photos/300/200?random=' + Date.now());
-            if (!resp.ok) throw new Error('HTTP ' + resp.status);
+            const response = await axios.get('https://picsum.photos/300/200?random=' + Date.now(), {
+                timeout: 5000,
+                responseType: 'blob'
+            });
             
             const img = document.createElement('img');
-            img.src = resp.url;
-            img.alt = 'Random Image';
+            img.src = URL.createObjectURL(response.data);
+            img.alt = 'Випадкове зображення';
             img.style.maxWidth = '260px';
             img.style.borderRadius = '8px';
             img.style.display = 'block';
@@ -137,16 +93,194 @@ console.log('font-size <h1>:', h1FontSize);
             resultBox.innerHTML = '';
             resultBox.appendChild(img);
             
-        } catch (e) {
-            console.error('API Error:', e);
-            resultBox.textContent = 'Помилка завантаження: ' + e.message;
+        } catch (error) {
+            console.error('Axios Error:', error);
+            resultBox.textContent = 'Помилка завантаження: ' + (error.message || 'Невідома помилка');
         }
     }
 
     window.addEventListener('load', () => {
         const btn = document.getElementById('dog-btn');
         if (btn) {
-            btn.addEventListener('click', fetchRandomDog);
+            btn.addEventListener('click', fetchRandomImage);
         }
+    });
+})();
+
+// Vue.js - реактивний пошук
+(function initVueSearch() {
+    window.addEventListener('load', () => {
+        const searchField = document.querySelector('.search-field');
+        if (!searchField) return;
+
+        // Vue.js для реактивного пошуку з використанням Lodash
+        const { createApp } = Vue;
+        const searchApp = createApp({
+            data() {
+                return {
+                    searchQuery: ''
+                };
+            },
+            watch: {
+                searchQuery(newVal) {
+                    const properties = Array.from(document.querySelectorAll('.property-card'));
+                    const query = _.toLower(newVal);
+                    
+                    if (!query) {
+                        properties.forEach(card => card.style.display = '');
+                        return;
+                    }
+
+                    const filtered = _.filter(properties, card => {
+                        const text = _.toLower(card.textContent);
+                        return _.includes(text, query);
+                    });
+
+                    properties.forEach(card => {
+                        card.style.display = _.includes(filtered, card) ? '' : 'none';
+                    });
+                }
+            }
+        });
+
+        const vueContainer = document.createElement('div');
+        vueContainer.id = 'vue-search';
+        vueContainer.style.display = 'none';
+        document.body.appendChild(vueContainer);
+        searchApp.mount('#vue-search');
+
+        searchField.addEventListener('input', function() {
+            if (searchApp._instance) {
+                searchApp._instance.data.searchQuery = this.value;
+            }
+        });
+    });
+})();
+
+// Chart.js - статистика нерухомості
+(function initPropertyChart() {
+    window.addEventListener('load', () => {
+        const chartContainer = document.querySelector('.properties');
+        if (!chartContainer) return;
+
+        const statsSection = document.createElement('section');
+        statsSection.className = 'statistics-section';
+        statsSection.innerHTML = `
+            <h2>Статистика нерухомості</h2>
+            <div style="max-width: 400px; margin: 20px auto;">
+                <canvas id="propertyStatsChart"></canvas>
+            </div>
+        `;
+        chartContainer.parentNode.insertBefore(statsSection, chartContainer);
+
+        const ctx = document.getElementById('propertyStatsChart');
+        if (!ctx) return;
+
+        new Chart(ctx.getContext('2d'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Квартири', 'Будинки', 'Офіси'],
+                datasets: [{
+                    data: [12, 5, 3],
+                    backgroundColor: ['#667eea', '#764ba2', '#f093fb']
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    });
+})();
+
+// jQuery - спрощені DOM маніпуляції та анімації
+(function initJQueryFeatures() {
+    $(document).ready(function() {
+        // Анімація при наведенні на картки
+        $('.property-card').hover(
+            function() {
+                $(this).fadeTo(200, 0.9);
+            },
+            function() {
+                $(this).fadeTo(200, 1);
+            }
+        );
+
+        // Плавне прокручування до секцій
+        $('.nav-links a').on('click', function(e) {
+            const href = $(this).attr('href');
+            if (href.startsWith('#')) {
+                e.preventDefault();
+                $('html, body').animate({
+                    scrollTop: $(href).offset().top
+                }, 500);
+            }
+        });
+    });
+})();
+
+// Lodash - обробка даних для порівняння фраз
+(function enhanceCompareWithLodash() {
+    window.addEventListener('load', () => {
+        const input = document.getElementById('phrase-input');
+        const button = document.getElementById('compare-btn');
+        const resultBox = document.getElementById('compare-result');
+        if (!input || !button || !resultBox) return;
+
+        let previousPhraseWords = null;
+
+        button.addEventListener('click', () => {
+            const words = _.words(_.toLower(input.value));
+            
+            if (previousPhraseWords) {
+                const common = _.intersection(previousPhraseWords, words);
+                const unique = _.difference(words, previousPhraseWords);
+                
+                if (common.length) {
+                    resultBox.textContent = `Спільні слова: ${common.join(', ')}`;
+                } else if (unique.length) {
+                    resultBox.textContent = `Нові слова: ${unique.join(', ')}`;
+                } else {
+                    resultBox.textContent = 'Спільних слів немає';
+                }
+            } else {
+                resultBox.textContent = 'Збережено першу фразу. Введіть наступну для порівняння.';
+            }
+            
+            previousPhraseWords = words;
+            input.value = '';
+            input.focus();
+        });
+    });
+})();
+
+// Moment.js - форматування дат у картках нерухомості
+(function addDatesWithMoment() {
+    window.addEventListener('load', () => {
+        const propertyCards = document.querySelectorAll('.property-card');
+        const today = moment();
+        
+        propertyCards.forEach((card, index) => {
+            const infoDiv = card.querySelector('.property-info');
+            if (!infoDiv) return;
+
+            // Додаємо дату публікації (симуляція)
+            const publishedDate = moment().subtract(index + 1, 'days');
+            const dateElement = document.createElement('p');
+            dateElement.className = 'published-date';
+            dateElement.style.fontSize = '0.9em';
+            dateElement.style.color = '#666';
+            dateElement.style.marginTop = '8px';
+            dateElement.textContent = `Опубліковано: ${publishedDate.format('DD MMMM YYYY')} (${publishedDate.fromNow()})`;
+            
+            const details = infoDiv.querySelector('.details');
+            if (details) {
+                details.parentNode.insertBefore(dateElement, details.nextSibling);
+            }
+        });
     });
 })();
