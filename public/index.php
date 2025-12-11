@@ -10,6 +10,8 @@ use App\Classes\ErrorController;
 use App\Classes\RegisterController;
 use App\Classes\PropertyController;
 use App\Classes\AboutMeController;
+use App\Classes\MyModel;
+use App\Classes\PropertyApiController;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 use Symfony\Component\VarDumper\VarDumper;
@@ -48,6 +50,8 @@ $logger->info('Request received', ['path' => $path, 'method' => $_SERVER['REQUES
 
 try {
     $viewer = new Viewer(__DIR__ . '/../src/templates', __DIR__ . '/../temp');
+    $myModel = new MyModel($logger);
+    $apiController = new PropertyApiController($myModel, $logger);
 
     switch ($path) {
         case '':
@@ -128,6 +132,37 @@ try {
         case 'aboutme':
             $controller = new AboutMeController($viewer, $logger);
             $controller->show();
+            break;
+
+        case (preg_match('/^api\/properties$/', $path, $matches) ? true : false):
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $apiController->index();
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $apiController->store();
+            }
+            break;
+
+        case (preg_match('/^api\/properties\/(\d+)$/', $path, $matches) ? true : false):
+            $propertyId = (int) $matches[1];
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                $apiController->show($propertyId);
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+                $apiController->update($propertyId);
+            } elseif ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+                $apiController->delete($propertyId);
+            }
+            break;
+
+        case 'api/properties/search':
+            $apiController->search();
+            break;
+
+        case 'api/properties/statistics':
+            $apiController->statistics();
+            break;
+
+        case 'api/properties/report':
+            $apiController->report();
             break;
 
         default:
