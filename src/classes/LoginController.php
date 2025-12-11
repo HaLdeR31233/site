@@ -34,27 +34,28 @@ class LoginController
 
     public function login(): void
     {
-        $this->logger->info("Login attempt", ["email" => $_POST["email"] ?? ""]);
+        $postData = Security::sanitizePostData();
 
-        $email = Security::sanitizeEmail($_POST["email"] ?? "");
-        $password = Security::sanitizePassword($_POST["password"] ?? "");
-        $remember = isset($_POST["remember"]);
+        $this->logger->info("Login attempt", ["email" => $postData["email"] ?? ""]);
+
+        $email = Security::sanitizeEmail($postData["email"] ?? "");
+        $password = Security::sanitizePassword($postData["password"] ?? "");
 
         $errors = [];
-
+    
         if (empty($email)) {
-            $errors[] = Security::escapeOutput("Email обов'язковий");
-        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = Security::escapeOutput("Невірний формат email");
+            $errors[] = "Email обов'язковий";
+        } elseif (!Security::validateEmail($email)) {
+            $errors[] = "Невірний формат email";
         }
 
         if (empty($password)) {
-            $errors[] = Security::escapeOutput("Пароль обов'язковий");
+            $errors[] = "Пароль обов'язковий";
         }
 
         if (!empty($errors)) {
-            $_SESSION["login_errors"] = $errors;
-            $_SESSION["old_input"] = ["email" => $email];
+            $_SESSION["login_errors"] = array_map([Security::class, 'escapeOutput'], $errors);
+            $_SESSION["old_input"] = ["email" => Security::escapeOutput($email)];
             $this->viewer->redirect("/login");
             return;
         }
@@ -67,15 +68,15 @@ class LoginController
                 $this->logger->info("User logged in successfully", ["email" => $email, "user_id" => $user["id"]]);
                 $this->viewer->redirect("/home");
             } else {
-                $_SESSION["login_errors"] = [Security::escapeOutput("Невірний email або пароль")];
-                $_SESSION["old_input"] = ["email" => $email];
+                $_SESSION["login_errors"] = ["Невірний email або пароль"];
+                $_SESSION["old_input"] = ["email" => Security::escapeOutput($email)];
                 $this->logger->warning("Failed login attempt", ["email" => $email]);
                 $this->viewer->redirect("/login");
             }
         } catch (Exception $e) {
             $this->logger->error("Database error during login", ["error" => $e->getMessage()]);
-            $_SESSION["login_errors"] = [Security::escapeOutput("Помилка сервера. Спробуйте пізніше.")];
-            $_SESSION["old_input"] = ["email" => $email];
+            $_SESSION["login_errors"] = ["Помилка сервера. Спробуйте пізніше."];
+            $_SESSION["old_input"] = ["email" => Security::escapeOutput($email)];
             $this->viewer->redirect("/login");
         }
     }
